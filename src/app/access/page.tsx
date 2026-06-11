@@ -1,72 +1,67 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Bus, Car, KeyRound } from "lucide-react";
+import { Car, ParkingCircle, Phone, Plane } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
 import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
-import { CONTACT_INFO, ORG_NAME, SITE_URL } from "@/lib/site";
+import { CONTACT_INFO, ORG_NAME_FULL, SITE_URL, TEL_HREF } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "アクセス",
   description:
-    "NPO法人奄美大島自然体験活動協議会への交通案内・集合場所のご案内。奄美空港からの車・バス・レンタカーでのアクセス方法をまとめています。",
+    "特定非営利活動法人奄美大島自然体験活動協議会への交通案内。奄美市住用町の事務所所在地、奄美空港からのアクセス、駐車場のご案内です。",
   alternates: { canonical: "/access" },
   openGraph: {
     title: "アクセス",
-    description: "集合場所と奄美空港からの交通手段のご案内。",
+    description: "事務所所在地と奄美空港からの交通手段、駐車場のご案内。",
     url: `${SITE_URL}/access`,
   },
 };
 
-// 奄美空港からの交通手段（3カラム）
 const transports = [
   {
+    icon: Plane,
+    title: "飛行機でお越しの方",
+    body: "奄美空港から住用町方面へお車で向かいます。主要都市からの直行便のほか、鹿児島空港での乗り継ぎ便もあります。",
+  },
+  {
     icon: Car,
-    title: "お車（送迎・タクシー）",
-    body: "奄美空港から約40分。タクシーのほか、プログラムによっては送迎のご相談も承ります（要事前予約）。",
+    title: "お車でお越しの方",
+    body: "島内の移動はレンタカーが便利です。集合場所までの詳しい経路は、ご予約確定時にご案内します。",
   },
   {
-    icon: Bus,
-    title: "路線バス",
-    body: "空港線バスで名瀬方面へ約55分。「名瀬○○」バス停下車、徒歩約5分です。本数が限られるため時刻表をご確認ください。",
-  },
-  {
-    icon: KeyRound,
-    title: "レンタカー",
-    body: "島内の移動にはレンタカーが便利です。空港周辺で借りられ、集合場所まで約40分。無料駐車場をご利用いただけます。",
+    icon: ParkingCircle,
+    title: "駐車場",
+    body: "事務所に駐車スペースをご用意しています。お車でそのままお越しいただけます。",
   },
 ];
 
-// 集合までの流れ（numbered list）
 const meetingSteps = [
   "ご予約確定時に、集合場所の地図と駐車場のご案内をお送りします。",
-  "当日は開始時刻の10分前までに事務所前にお集まりください。",
+  "当日は開始時刻の10分前までに事務所へお集まりください。",
   "受付・装備の確認のあと、ガイドと一緒にフィールドへ出発します。",
 ];
 
 export default function AccessPage() {
+  // 住所をマップ検索クエリに（住用町役勝）
+  const mapQuery = encodeURIComponent("鹿児島県奄美市住用町役勝");
+
   return (
     <>
       <PageHeader
         eyebrow="Access"
         title="アクセス"
-        lead="集合場所・交通手段をご案内します。ご不明な点はお気軽にお問い合わせください。"
+        lead="事務所の所在地と交通手段、駐車場についてご案内します。"
         tone="water"
       />
 
-      {/* 地図＋所在地 */}
       <section className="mx-auto max-w-content px-5 py-20 md:px-8 md:py-28">
         <div className="grid gap-12 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
           <Reveal variant="fadeInLeft">
-            <h2 className="text-fluid-h3 font-heading font-bold">集合場所</h2>
-            {/* TODO: クライアント確認（正式な集合場所・住所・地図の正確な座標） */}
-            <p className="mt-2 text-sm text-text-muted">
-              ※ 住所はサンプルです。確定後に正式な集合場所・座標へ差し替えます。
-            </p>
+            <h2 className="text-fluid-h3 font-heading font-bold">所在地</h2>
             <div className="mt-5 overflow-hidden rounded-3xl border border-border shadow-card">
-              {/* TODO: クライアント確認後、正式な住所の埋め込みURLに差し替え（現在は奄美大島全域表示） */}
               <iframe
-                src="https://www.google.com/maps?q=%E5%A5%84%E7%BE%8E%E5%A4%A7%E5%B3%B6&output=embed&z=10"
-                title="集合場所周辺の地図（暫定：奄美大島全域）"
+                src={`https://www.google.com/maps?q=${mapQuery}&output=embed&z=12`}
+                title="奄美市住用町役勝 周辺の地図"
                 className="h-72 w-full md:h-80"
                 style={{ border: 0 }}
                 loading="lazy"
@@ -78,7 +73,7 @@ export default function AccessPage() {
             <dl className="mt-6 space-y-3 rounded-2xl border border-border bg-surface p-6 text-sm">
               <div className="flex gap-3">
                 <dt className="w-20 shrink-0 text-text-muted">名称</dt>
-                <dd className="font-medium">{ORG_NAME}</dd>
+                <dd className="font-medium">{ORG_NAME_FULL}</dd>
               </div>
               <div className="flex gap-3">
                 <dt className="w-20 shrink-0 text-text-muted">所在地</dt>
@@ -87,8 +82,12 @@ export default function AccessPage() {
                 </dd>
               </div>
               <div className="flex gap-3">
-                <dt className="w-20 shrink-0 text-text-muted">TEL</dt>
-                <dd className="font-medium">{CONTACT_INFO.tel}</dd>
+                <dt className="w-20 shrink-0 text-text-muted">電話</dt>
+                <dd className="font-medium">
+                  <a href={TEL_HREF} className="text-accent hover:underline">
+                    {CONTACT_INFO.tel}
+                  </a>
+                </dd>
               </div>
               <div className="flex gap-3">
                 <dt className="w-20 shrink-0 text-text-muted">受付</dt>
@@ -97,7 +96,7 @@ export default function AccessPage() {
             </dl>
           </Reveal>
 
-          {/* 集合までの流れ（numbered list） */}
+          {/* 集合までの流れ */}
           <Reveal variant="fadeInRight" delay={0.1}>
             <h2 className="text-fluid-h3 font-heading font-bold">集合までの流れ</h2>
             <p className="mt-2 text-sm text-text-muted">
@@ -121,31 +120,30 @@ export default function AccessPage() {
             </ol>
 
             <div className="mt-8 rounded-2xl bg-accent/5 p-6">
-              <h3 className="font-heading text-base font-semibold">ご不安な点はご相談を</h3>
+              <h3 className="font-heading text-base font-semibold">集合時間のご相談</h3>
               <p className="mt-2 text-sm leading-relaxed text-text-muted">
-                フェリーや飛行機の到着時刻に合わせた集合時間の調整も可能です。お気軽にお問い合わせください。
+                飛行機やフェリーの到着時刻に合わせた調整も可能です。お気軽にお電話ください。
               </p>
-              <Link
-                href="/contact"
-                className="mt-4 inline-block rounded-full bg-accent px-6 py-3 text-sm font-medium text-white transition-transform hover:-translate-y-0.5"
+              <a
+                href={TEL_HREF}
+                className="mt-4 inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-medium text-white transition-transform hover:-translate-y-0.5"
               >
-                アクセスについて問い合わせる
-              </Link>
+                <Phone size={15} aria-hidden />
+                {CONTACT_INFO.tel}
+              </a>
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* 奄美空港からの交通手段：3カラム */}
+      {/* 交通手段：3カラム */}
       <section className="bg-surface/50 py-20 md:py-28">
         <div className="mx-auto max-w-content px-5 md:px-8">
           <Reveal className="mb-10 text-center">
             <p className="font-heading text-xs uppercase tracking-[0.3em] text-accent">
               Transportation
             </p>
-            <h2 className="text-fluid-h2 mt-4 font-heading font-bold">
-              奄美空港からの交通手段
-            </h2>
+            <h2 className="text-fluid-h2 mt-4 font-heading font-bold">交通・駐車場のご案内</h2>
           </Reveal>
           <Stagger className="grid gap-6 md:grid-cols-3">
             {transports.map((t) => (
@@ -162,10 +160,6 @@ export default function AccessPage() {
               </StaggerItem>
             ))}
           </Stagger>
-          {/* TODO: クライアント確認（所要時間・バス路線名・バス停名の実値） */}
-          <p className="mt-6 text-center text-xs text-text-muted">
-            ※ 所要時間・路線情報はサンプルです。
-          </p>
         </div>
       </section>
     </>

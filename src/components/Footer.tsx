@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CONTACT_INFO, NAV_LINKS, ORG_NAME } from "@/lib/site";
+import { CONTACT_INFO, MAIL_HREF, NAV_LINKS, ORG_NAME, TEL_HREF } from "@/lib/site";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -48,7 +48,6 @@ export function Footer() {
           <h2 className="font-heading text-xs font-semibold uppercase tracking-[0.2em] text-text-muted">
             Contact
           </h2>
-          {/* TODO: クライアント確認（住所・電話・受付時間の実値） */}
           <address className="mt-4 space-y-2.5 text-sm not-italic text-text-muted">
             <p>
               {CONTACT_INFO.postal}
@@ -56,13 +55,20 @@ export function Footer() {
               {CONTACT_INFO.address}
             </p>
             <p>
-              TEL：{CONTACT_INFO.tel}
+              TEL：
+              <a href={TEL_HREF} className="text-accent hover:underline">
+                {CONTACT_INFO.tel}
+              </a>
+              <br />
+              <a href={MAIL_HREF} className="text-accent hover:underline break-all">
+                {CONTACT_INFO.email}
+              </a>
               <br />
               受付：{CONTACT_INFO.hours}
             </p>
             <p>
               <Link href="/contact" className="text-accent hover:underline">
-                お問い合わせフォーム
+                お問い合わせ・予約
               </Link>
             </p>
           </address>

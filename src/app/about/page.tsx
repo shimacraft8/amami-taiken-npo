@@ -1,54 +1,58 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Leaf, ShieldCheck, Users } from "lucide-react";
+import { GraduationCap, Leaf, Search } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
 import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
-import { StatsCounter } from "@/components/StatsCounter";
 import { AmamiSilhouette } from "@/components/AmamiSilhouette";
-import { CONTACT_INFO, ORG_NAME, SITE_URL } from "@/lib/site";
+import {
+  CONTACT_INFO,
+  ORG_NAME_FULL,
+  REPRESENTATIVE,
+  SITE_URL,
+} from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "私たちについて",
   description:
-    "NPO法人奄美大島自然体験活動協議会の概要・ミッション・沿革・組織体制をご紹介します。希少な生態系の保全と自然体験活動の普及に取り組んでいます。",
+    "特定非営利活動法人奄美大島自然体験活動協議会の概要・目的・沿革・組織体制をご紹介します。希少な生態系の保全と、自然体験・文化交流を通じた啓発に取り組んでいます。",
   alternates: { canonical: "/about" },
   openGraph: {
     title: "私たちについて",
     description:
-      "奄美の自然を知り尽くした認定ガイドが集うエコツアー協議会の、ミッション・沿革・組織のご紹介。",
+      "奄美の希少な自然を守り、体験と文化交流を通じて伝えるNPOの、目的・沿革・組織のご紹介。",
     url: `${SITE_URL}/about`,
   },
 };
 
-// ミッション3本柱（大きなアイコン＋テキスト）
+// 法人の目的（定款の特定非営利活動の3分野をもとに新規執筆）
 const missions = [
   {
     icon: Leaf,
-    title: "保全",
+    title: "環境の保全",
     en: "Conservation",
-    body: "奄美大島とその周辺地域に息づく希少な動植物・固有の生態系を、調査と保護活動を通じて未来へ引き継ぎます。",
+    body: "奄美大島とその周辺地域に息づく希少な動植物・固有の生態系の保護に取り組み、未来へ引き継ぎます。",
   },
   {
-    icon: Users,
-    title: "体験の普及",
+    icon: GraduationCap,
+    title: "体験と社会教育",
     en: "Experience",
-    body: "認定ガイドによる安全で質の高い自然体験を提供し、島の自然のかけがえのなさを一人でも多くの方に伝えます。",
+    body: "観察・体験イベントを企画運営し、自然や文化に触れる機会を提供。その大切さを広く啓発します。",
   },
   {
-    icon: ShieldCheck,
-    title: "持続可能性",
-    en: "Sustainability",
-    body: "自然への負荷を抑えたエコツアーの基準づくりと普及啓発で、観光と保全が両立する島の在り方を提案します。",
+    icon: Search,
+    title: "調査・情報発信",
+    en: "Research",
+    body: "希少な動植物や生態系について調査・研究を行い、ホームページやSNSを通じて情報を発信します。",
   },
 ];
 
-// 沿革（ダミー）。実際の年表に差し替えること。
+// 沿革（登記・設立趣旨書の経過に基づく）
 const history = [
-  { year: "2005", text: "島内の認定ガイド有志により、自然体験活動の勉強会を発足。" },
-  { year: "2010", text: "協議会を組織化。エコツアーの安全基準とガイドラインを整備。" },
-  { year: "2016", text: "希少種の生息地モニタリングと保全活動を本格化。" },
-  { year: "2021", text: "奄美大島の世界自然遺産登録を受け、来島者向けの普及啓発を強化。" },
-  { year: "現在", text: "認定ガイドによるエコツアーと、次世代への環境教育を継続。" },
+  { year: "平成29年 9月", text: "久保 公と有志が集まり、奄美の環境保護活動について勉強会を開始。" },
+  { year: "平成29年 9月", text: "発起人会を開催し、設立の趣旨・定款・事業計画などを決定。" },
+  { year: "平成29年10月", text: "設立総会を開催。法人設立と役員を承認。" },
+  { year: "平成30年 3月", text: "特定非営利活動法人として成立（設立登記）。" },
+  { year: "現在", text: "認定ガイドによる自然体験事業と、調査・啓発活動を継続。" },
 ];
 
 export default function AboutPage() {
@@ -57,22 +61,19 @@ export default function AboutPage() {
       <PageHeader
         eyebrow="About Us"
         title="私たちについて"
-        lead="奄美の自然を知り尽くした認定ガイドが集う、エコツアー協議会です。"
+        lead="奄美の希少な自然を守り、体験と文化交流を通じてその魅力を伝える特定非営利活動法人です。"
         tone="forest"
       />
 
-      {/* ミッション：3カラムの大アイコンカード */}
+      {/* 目的：3カラムの大アイコンカード */}
       <section className="relative mx-auto max-w-content overflow-hidden px-5 py-20 md:px-8 md:py-28">
-        {/* 島のシルエットを背景アクセントに */}
-        <AmamiSilhouette
-          className="pointer-events-none absolute -right-16 -top-10 w-[420px] text-accent opacity-[0.06]"
-        />
+        <AmamiSilhouette className="pointer-events-none absolute -right-16 -top-10 w-[420px] text-accent opacity-[0.06]" />
         <Reveal className="text-center">
           <p className="font-heading text-xs uppercase tracking-[0.3em] text-accent">Mission</p>
-          <h2 className="text-fluid-h2 mt-4 font-heading font-bold">私たちのミッション</h2>
+          <h2 className="text-fluid-h2 mt-4 font-heading font-bold">私たちの目的</h2>
           <p className="text-fluid-lead mx-auto mt-5 max-w-2xl text-text-muted">
-            2021年、奄美大島は世界自然遺産に登録されました。
-            訪れる人が増えるいまだからこそ、私たちは3つの柱で島の自然と向き合います。
+            奄美大島は2021年に世界自然遺産へ登録されました。観光客の増加が見込まれるいまだからこそ、
+            民間の立場から、3つの分野で島の自然と向き合います。
           </p>
         </Reveal>
         <Stagger className="mt-12 grid gap-6 md:grid-cols-3">
@@ -95,37 +96,30 @@ export default function AboutPage() {
         </Stagger>
       </section>
 
-      {/* 沿革：タイムライン（左縦線＋右テキスト） */}
+      {/* 沿革：タイムライン */}
       <section className="bg-surface/50 py-20 md:py-28">
         <div className="mx-auto max-w-content px-5 md:px-8">
           <Reveal className="mb-12">
             <p className="font-heading text-xs uppercase tracking-[0.3em] text-accent">History</p>
             <h2 className="text-fluid-h2 mt-4 font-heading font-bold">沿革</h2>
-            {/* TODO: クライアント確認（設立年・沿革の実値） */}
-            <p className="mt-2 text-sm text-text-muted">※ 年表はサンプルです</p>
           </Reveal>
 
           <Stagger as="ul" className="relative ml-2 max-w-2xl">
-            {/* 左の縦線 */}
-            <span
-              aria-hidden
-              className="absolute bottom-2 left-0 top-2 w-px bg-accent/25"
-            />
-            {history.map((h) => (
+            <span aria-hidden className="absolute bottom-2 left-0 top-2 w-px bg-accent/25" />
+            {history.map((h, i) => (
               <StaggerItem
-                key={h.year}
+                key={`${h.year}-${i}`}
                 as="li"
                 variant="fadeInLeft"
                 className="relative pb-10 pl-10 last:pb-0"
               >
-                {/* ノード */}
                 <span
                   aria-hidden
                   className="absolute left-0 top-1 flex h-4 w-4 -translate-x-1/2 items-center justify-center"
                 >
                   <span className="h-3 w-3 rounded-full border-2 border-accent bg-bg" />
                 </span>
-                <p className="font-heading text-lg font-bold leading-none text-accent">
+                <p className="font-heading text-base font-bold leading-none text-accent">
                   {h.year}
                 </p>
                 <p className="mt-2 leading-relaxed text-text-muted">{h.text}</p>
@@ -143,16 +137,20 @@ export default function AboutPage() {
           </p>
           <h2 className="text-fluid-h2 mt-4 font-heading font-bold">組織概要</h2>
         </Reveal>
-        {/* TODO: クライアント確認（名称以外の項目はダミー） */}
         <Reveal delay={0.1}>
           <dl className="overflow-hidden rounded-2xl border border-border bg-surface">
             {[
-              ["名称", ORG_NAME],
-              ["所在地", `${CONTACT_INFO.address}（${CONTACT_INFO.postal}）`],
-              ["設立", "2010年（前身の勉強会は2005年発足）"],
-              ["活動内容", "エコツアーの企画・運営／自然保護活動／環境教育・普及啓発"],
+              ["名称", ORG_NAME_FULL],
+              ["代表者", `理事長　${REPRESENTATIVE}`],
+              ["所在地", `${CONTACT_INFO.postal} ${CONTACT_INFO.address}`],
+              ["設立", CONTACT_INFO.established],
+              ["電話", CONTACT_INFO.tel],
+              ["メール", CONTACT_INFO.email],
+              [
+                "活動内容",
+                "自然体験・観察イベントの企画運営／希少な動植物・生態系の調査研究と情報提供／環境保全の啓発・文化交流",
+              ],
               ["対象エリア", "奄美大島およびその周辺地域"],
-              ["会員", "認定ネイチャーガイド ほか"],
             ].map(([k, v], i) => (
               <div
                 key={k}
@@ -161,32 +159,19 @@ export default function AboutPage() {
                 }`}
               >
                 <dt className="font-heading text-sm font-semibold text-text-muted">{k}</dt>
-                <dd className="text-text">{v}</dd>
+                <dd className="break-words text-text">{v}</dd>
               </div>
             ))}
           </dl>
         </Reveal>
-      </section>
 
-      {/* 実績 */}
-      <section className="bg-surface/50 py-20 md:py-24">
-        <div className="mx-auto max-w-content px-5 md:px-8">
-          <Reveal className="mb-8 text-center">
-            <h2 className="text-fluid-h3 font-heading font-bold">活動の実績</h2>
-            {/* TODO: クライアント確認（実績数値の実値） */}
-            <p className="mt-2 text-sm text-text-muted">※ 数値はサンプルです</p>
-          </Reveal>
-          <Reveal delay={0.1} variant="scaleIn">
-            <StatsCounter />
-          </Reveal>
-          <div className="mt-12 text-center">
-            <Link
-              href="/contact"
-              className="inline-block rounded-full bg-accent px-7 py-3.5 text-sm font-medium text-white transition-transform hover:-translate-y-0.5"
-            >
-              活動について問い合わせる
-            </Link>
-          </div>
+        <div className="mt-12 text-center">
+          <Link
+            href="/contact"
+            className="inline-block rounded-full bg-accent px-7 py-3.5 text-sm font-medium text-white transition-transform hover:-translate-y-0.5"
+          >
+            活動について問い合わせる
+          </Link>
         </div>
       </section>
     </>

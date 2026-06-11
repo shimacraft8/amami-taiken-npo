@@ -1,20 +1,20 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { Phone } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
 import { Reveal } from "@/components/Reveal";
 import { ToursExplorer } from "@/components/ToursExplorer";
 import { tours } from "@/data/tours";
-import { ORG_NAME, SITE_URL } from "@/lib/site";
+import { CONTACT_INFO, ORG_NAME_FULL, SITE_URL, TEL_HREF } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "体験プログラム",
   description:
-    "金作原原生林の森散策、ナイトツアー、マングローブカヌー、滝めぐり、湯湾岳トレッキング、バードウォッチング。奄美大島の自然を楽しむ6つのエコツアープログラム。",
+    "野生・生物観察、シーカヤック・リバーカヌー、川遊び、ダイビング、トレッキング、島唄・三味線、ホエールウォッチングなど。奄美大島の自然と文化を体験できる多彩なプログラム。",
   alternates: { canonical: "/tours" },
   openGraph: {
     title: "体験プログラム",
     description:
-      "森・夜・海・山。奄美大島の自然を楽しむ6つのエコツアープログラムのご案内。",
+      "森・川・海・島の文化まで。奄美大島の自然を楽しむ多彩な体験プログラムのご案内。",
     url: `${SITE_URL}/tours`,
   },
 };
@@ -27,11 +27,11 @@ const toursJsonLd = {
     name: tour.title,
     description: tour.summary,
     url: `${SITE_URL}/tours#${tour.slug}`,
-    touristType: tour.suitableFor,
     provider: {
       "@type": "NGO",
-      name: ORG_NAME,
+      name: ORG_NAME_FULL,
       url: SITE_URL,
+      telephone: CONTACT_INFO.tel,
     },
     itinerary: {
       "@type": "Place",
@@ -55,21 +55,26 @@ export default function ToursPage() {
       <PageHeader
         eyebrow="Experience Programs"
         title="体験プログラム"
-        lead="森・夜・海・山。奄美のいろいろな表情に出会う6つのプログラム。カテゴリで絞り込んでお探しいただけます。"
+        lead="自然観察から海・川あそび、山歩き、島の文化体験まで。奄美の魅力を多彩なかたちでご案内します。"
         tone="forest"
       />
 
-      {/* 料金・所要時間の注記 */}
+      {/* 予約方法の案内 */}
       <section className="mx-auto max-w-content px-5 pt-12 md:px-8">
-        {/* TODO: クライアント確認（料金・所要時間・定員・催行条件の実値） */}
         <Reveal>
-          <p className="rounded-xl border border-border bg-surface px-4 py-3 text-sm text-text-muted">
-            ※ 料金・所要時間・定員はサンプルです。確定後に差し替えます。最新の催行状況は
-            <Link href="/contact" className="text-accent hover:underline">
-              お問い合わせ
-            </Link>
-            ください。
-          </p>
+          <div className="flex flex-col gap-3 rounded-2xl border border-border bg-surface px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-sm leading-relaxed text-text-muted">
+              ご予約・お申し込みは<span className="font-medium text-text">お電話</span>で承ります。
+              内容・所要時間・料金など、お気軽にお問い合わせください。
+            </p>
+            <a
+              href={TEL_HREF}
+              className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white transition-transform hover:-translate-y-0.5"
+            >
+              <Phone size={15} aria-hidden />
+              {CONTACT_INFO.tel}
+            </a>
+          </div>
         </Reveal>
       </section>
 
@@ -78,22 +83,12 @@ export default function ToursPage() {
         <ToursExplorer />
       </section>
 
-      {/* CTA */}
+      {/* 注記 */}
       <section className="mx-auto max-w-content px-5 pb-20 md:px-8 md:pb-28">
-        <Reveal className="rounded-3xl bg-accent px-7 py-12 text-center text-white md:px-12">
-          <h2 className="text-fluid-h3 font-heading font-bold">
-            どのプログラムが合うか、迷ったら。
-          </h2>
-          <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-white/90">
-            日程・体力・興味に合わせて、ガイドが最適なプランをご提案します。お気軽にご相談ください。
-          </p>
-          <Link
-            href="/contact"
-            className="mt-6 inline-block rounded-full bg-white px-7 py-3.5 text-sm font-medium text-accent transition-transform hover:-translate-y-0.5"
-          >
-            プログラム選びを相談する
-          </Link>
-        </Reveal>
+        <p className="text-center text-xs text-text-muted">
+          ※ 各プログラムは天候・季節・潮位などにより、内容や開催時間が変わる場合があります。
+          催行状況はお電話でご確認ください。
+        </p>
       </section>
     </>
   );

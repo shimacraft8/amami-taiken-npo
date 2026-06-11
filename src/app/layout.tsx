@@ -6,7 +6,14 @@ import { Footer } from "@/components/Footer";
 import { ClientEffects } from "@/components/ClientEffects";
 import { StickyContact } from "@/components/StickyContact";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
-import { ORG_DESCRIPTION, ORG_NAME, SITE_URL } from "@/lib/site";
+import {
+  CONTACT_INFO,
+  ORG_DESCRIPTION,
+  ORG_NAME,
+  ORG_NAME_FULL,
+  REPRESENTATIVE,
+  SITE_URL,
+} from "@/lib/site";
 
 // 見出し（英字）
 const outfit = Outfit({
@@ -62,11 +69,22 @@ export const metadata: Metadata = {
 const ngoJsonLd = {
   "@context": "https://schema.org",
   "@type": "NGO",
-  name: ORG_NAME,
-  alternateName: "奄美大島自然体験活動協議会",
+  name: ORG_NAME_FULL,
+  alternateName: ORG_NAME,
   description: ORG_DESCRIPTION,
   areaServed: "奄美大島",
   url: SITE_URL,
+  telephone: CONTACT_INFO.tel,
+  email: CONTACT_INFO.email,
+  founder: { "@type": "Person", name: REPRESENTATIVE },
+  address: {
+    "@type": "PostalAddress",
+    postalCode: CONTACT_INFO.postal.replace("〒", ""),
+    addressRegion: "鹿児島県",
+    addressLocality: "奄美市",
+    streetAddress: "住用町大字役勝7番地",
+    addressCountry: "JP",
+  },
 } as const;
 
 export default function RootLayout({
