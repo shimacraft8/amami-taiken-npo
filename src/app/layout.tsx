@@ -3,7 +3,6 @@ import { Outfit, Noto_Sans_JP, Noto_Serif_JP } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { ClientEffects } from "@/components/ClientEffects";
 import { StickyContact } from "@/components/StickyContact";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import {
@@ -102,7 +101,6 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(ngoJsonLd) }}
         />
-        <ClientEffects />
         <Header />
         {/* スマホ固定CTAに隠れないよう下部に余白（lg以上は不要） */}
         <div className="flex flex-1 flex-col pb-20 lg:pb-0">{children}</div>

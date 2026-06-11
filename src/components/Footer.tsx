@@ -9,18 +9,10 @@ export function Footer() {
       <div className="mx-auto grid max-w-content gap-10 px-5 py-14 md:grid-cols-[1.4fr_1fr_1fr] md:px-8">
         {/* 団体情報 */}
         <div>
-          <div className="flex items-center gap-2">
-            <span
-              aria-hidden
-              className="flex h-9 w-9 items-center justify-center rounded-full bg-accent text-base text-white"
-            >
-              奄
-            </span>
-            <span className="font-heading text-sm font-semibold">{ORG_NAME}</span>
-          </div>
+          <span className="font-heading text-sm font-semibold">{ORG_NAME}</span>
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-text-muted">
-            世界自然遺産・奄美大島の希少な自然を未来へ。認定ネイチャーガイドが、
-            保全への配慮と安全管理を大切に、森・夜・海のエコツアーをご案内します。
+            世界自然遺産・奄美大島の希少な自然を未来へ。保全への配慮と安全管理を大切に、
+            森・川・海から島の文化まで、多彩な自然体験をご案内します。
           </p>
         </div>
 

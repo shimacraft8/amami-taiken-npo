@@ -2,11 +2,9 @@
 
 import { memo, useMemo, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { Phone } from "lucide-react";
 import { tours } from "@/data/tours";
 import type { Tour, TourCategory } from "@/types";
-import { CATEGORY_META, TimeBadges } from "./BentoGrid";
-import { CONTACT_INFO, TEL_HREF } from "@/lib/site";
+import { CATEGORY_META, TimeBadges } from "./tourMeta";
 
 type FilterKey = "all" | "自然観察" | "海・川" | "山・森" | "島の文化" | "その他";
 
@@ -39,28 +37,26 @@ const TourDetailCard = memo(function TourDetailCard({ tour }: { tour: Tour }) {
         className="absolute inset-x-0 top-0 h-1"
         style={{ background: meta.gradient }}
       />
-      <div className="flex items-center justify-between">
-        <span
-          className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium text-white"
-          style={{ background: meta.gradient }}
-        >
-          <Icon size={13} aria-hidden />
-          {tour.category}
-        </span>
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center gap-2">
+          {/* 資料と同じ通し番号 */}
+          <span
+            className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full font-heading text-xs font-bold text-white"
+            style={{ background: meta.gradient }}
+            aria-label={`プログラム番号 ${tour.no}`}
+          >
+            {tour.no}
+          </span>
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-accent/10 px-3 py-1 text-xs font-medium text-accent">
+            <Icon size={13} aria-hidden />
+            {tour.category}
+          </span>
+        </div>
         <TimeBadges times={tour.timeOfDay} />
       </div>
 
       <h2 className="mt-4 font-heading text-xl font-bold">{tour.title}</h2>
-      <p className="mt-2 flex-1 text-sm leading-relaxed text-text-muted">{tour.summary}</p>
-
-      {/* 予約は電話がメイン */}
-      <a
-        href={TEL_HREF}
-        className="mt-5 inline-flex items-center gap-2 self-start rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-accent-soft"
-      >
-        <Phone size={15} aria-hidden />
-        電話で予約・相談（{CONTACT_INFO.tel}）
-      </a>
+      <p className="mt-2 text-sm leading-relaxed text-text-muted">{tour.summary}</p>
     </motion.article>
   );
 });

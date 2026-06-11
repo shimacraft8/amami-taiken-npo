@@ -7,6 +7,7 @@ import type { Tour } from "@/types";
  */
 export const tours: Tour[] = [
   {
+    no: 1,
     slug: "wildlife-watching",
     title: "野生・生物観察体験",
     summary:
@@ -16,6 +17,7 @@ export const tours: Tour[] = [
     featured: true,
   },
   {
+    no: 2,
     slug: "sea-kayak-canoe",
     title: "シーカヤック・リバーカヌー体験",
     summary:
@@ -25,6 +27,7 @@ export const tours: Tour[] = [
     featured: true,
   },
   {
+    no: 3,
     slug: "river-play",
     title: "川遊び体験",
     summary: "澄んだ清流で、生きものをさがしながら涼やかに過ごす。ご家族にもおすすめです。",
@@ -33,6 +36,7 @@ export const tours: Tour[] = [
     featured: false,
   },
   {
+    no: 4,
     slug: "diving-snorkeling",
     title: "ダイビング・シュノーケリング体験",
     summary: "サンゴ礁と色とりどりの魚たちが待つ、奄美の海の中をのぞいてみる体験。",
@@ -41,6 +45,7 @@ export const tours: Tour[] = [
     featured: true,
   },
   {
+    no: 5,
     slug: "tidepool",
     title: "磯遊び体験",
     summary: "潮だまりをのぞけば小さな海の生きものたちのにぎわい。じっくり観察して楽しみます。",
@@ -49,6 +54,7 @@ export const tours: Tour[] = [
     featured: false,
   },
   {
+    no: 6,
     slug: "fishing",
     title: "船釣り・磯釣り体験",
     summary: "奄美の豊かな海で、船からも磯からも。釣りの楽しさと海の恵みを体感します。",
@@ -57,6 +63,7 @@ export const tours: Tour[] = [
     featured: false,
   },
   {
+    no: 7,
     slug: "trekking",
     title: "山歩き（トレッキング）体験",
     summary: "亜熱帯の森を歩き、固有の植物や森の気配を感じる。初心者向けのコースもご用意します。",
@@ -65,6 +72,7 @@ export const tours: Tour[] = [
     featured: true,
   },
   {
+    no: 8,
     slug: "island-food",
     title: "島食体験",
     summary: "奄美の特産・地場の食材を自分で採り、味わう。島の暮らしと食文化に触れる体験です。",
@@ -73,6 +81,7 @@ export const tours: Tour[] = [
     featured: false,
   },
   {
+    no: 9,
     slug: "shima-uta",
     title: "島唄・島踊り・島口・三味線体験",
     summary: "奄美に受け継がれる唄と踊り、島ことばと三味線。土地の文化を体で楽しみます。",
@@ -81,6 +90,7 @@ export const tours: Tour[] = [
     featured: true,
   },
   {
+    no: 10,
     slug: "town-walk",
     title: "島まち歩き体験",
     summary: "島の歴史や文化、泥染め・機織りなどの手仕事をたどりながら、まちをゆっくり歩きます。",
@@ -89,6 +99,7 @@ export const tours: Tour[] = [
     featured: false,
   },
   {
+    no: 11,
     slug: "old-trail",
     title: "古道歩き体験",
     summary: "人々が行き交った古い道をたどり、奄美の暮らしの歴史に思いをはせる散策です。",
@@ -97,6 +108,7 @@ export const tours: Tour[] = [
     featured: false,
   },
   {
+    no: 12,
     slug: "camp",
     title: "キャンプ体験",
     summary: "自然のなかで一夜を過ごす。星空や夜の音に包まれる、奄美ならではのアウトドア体験。",
@@ -105,6 +117,7 @@ export const tours: Tour[] = [
     featured: false,
   },
   {
+    no: 13,
     slug: "island-life",
     title: "島くらし・民泊体験",
     summary: "島の家庭で過ごし、暮らしのリズムを体感する。人とのふれあいが旅の思い出になります。",
@@ -113,6 +126,7 @@ export const tours: Tour[] = [
     featured: false,
   },
   {
+    no: 14,
     slug: "whale-watching",
     title: "ホエールウォッチング体験",
     summary: "冬から春にかけて奄美の海を訪れるクジラに会いに。雄大な姿を船上から見守ります。",
@@ -121,6 +135,7 @@ export const tours: Tour[] = [
     featured: true,
   },
   {
+    no: 15,
     slug: "location-coordinate",
     title: "撮影ロケーションコーディネート",
     summary:
@@ -135,6 +150,3 @@ export const tours: Tour[] = [
 export function getTourBySlug(slug: string): Tour | undefined {
   return tours.find((t) => t.slug === slug);
 }
-
-/** トップページ用のピックアップ（featured のみ） */
-export const featuredTours = tours.filter((t) => t.featured);

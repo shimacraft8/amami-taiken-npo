@@ -31,7 +31,7 @@ export const CONTACT_INFO = {
   postal: "〒894-1201",
   address: "鹿児島県奄美市住用町大字役勝7番地",
   tel: "0997-69-2189",
-  email: "mangrove@minos.ocn.ne.jp",
+  email: "mangrove@amami-taiken.com",
   hours: "9:00〜18:00（年中無休）",
   established: "平成30年3月26日",
 } as const;

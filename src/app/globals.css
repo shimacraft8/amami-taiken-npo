@@ -48,36 +48,39 @@ body {
   font-family: var(--font-noto-sans-jp), sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  /* 日本語の不自然な行末（小書き仮名・句読点）での折り返しを抑制 */
+  line-break: strict;
+  word-break: normal;
+  overflow-wrap: break-word;
 }
 
-/* 流体タイポグラフィ用ユーティリティ（clamp） */
+/* 流体タイポグラフィ用ユーティリティ（clamp）
+   text-wrap で「変な位置での改行・行末の一文字残り」を緩和する。
+   - 見出し: balance（行のバランスを揃える）
+   - リード文: pretty（孤立行・不自然な折り返しを回避）
+   未対応ブラウザは通常の折り返しにグレースフルにフォールバックする。 */
 @layer utilities {
   .text-fluid-hero {
     font-size: clamp(2.5rem, 7vw, 6rem);
     line-height: 1.05;
     letter-spacing: -0.02em;
+    text-wrap: balance;
   }
   .text-fluid-h2 {
     font-size: clamp(1.75rem, 4vw, 3rem);
     line-height: 1.15;
     letter-spacing: -0.01em;
+    text-wrap: balance;
   }
   .text-fluid-h3 {
     font-size: clamp(1.25rem, 2.5vw, 1.75rem);
     line-height: 1.25;
+    text-wrap: balance;
   }
   .text-fluid-lead {
     font-size: clamp(1rem, 1.6vw, 1.25rem);
     line-height: 1.8;
-  }
-}
-
-/* カスタムカーソル（PCのみ・JSで body に .has-custom-cursor を付与） */
-@media (pointer: fine) {
-  .has-custom-cursor,
-  .has-custom-cursor a,
-  .has-custom-cursor button {
-    cursor: none;
+    text-wrap: pretty;
   }
 }
 

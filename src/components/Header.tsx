@@ -58,16 +58,8 @@ export function Header() {
       }
     >
       <div className="mx-auto flex h-16 max-w-content items-center justify-between px-5 md:h-20 md:px-8">
-        {/* ロゴ */}
-        <Link href="/" className="group relative z-[60] flex items-center gap-2" aria-label="ホームへ">
-          <span
-            aria-hidden
-            className={`flex h-9 w-9 items-center justify-center rounded-full text-base transition-colors duration-300 ${
-              solid && !open ? "bg-accent text-white" : "bg-white/15 text-white backdrop-blur-sm"
-            } ${open ? "!bg-white/15 !text-white" : ""}`}
-          >
-            奄
-          </span>
+        {/* ロゴ（文字のみ・円バッジは廃止） */}
+        <Link href="/" className="group relative z-[60] flex items-center" aria-label="ホームへ">
           <span className="flex flex-col leading-tight">
             <span
               className={`font-heading text-sm font-semibold tracking-wide transition-colors duration-300 ${

@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Phone } from "lucide-react";
 import { Hero } from "@/components/Hero";
-import { BentoGrid } from "@/components/BentoGrid";
 import { Reveal } from "@/components/Reveal";
+import { SplashScreen } from "@/components/SplashScreen";
 import { CONTACT_INFO, TEL_HREF } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -16,6 +16,9 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
+      {/* 初回表示時のスプラッシュ（トップのみ・約2秒） */}
+      <SplashScreen />
+
       <Hero />
 
       {/* ミッション導入 */}
@@ -49,31 +52,6 @@ export default function Home() {
               </Link>
             </div>
           </Reveal>
-        </div>
-      </section>
-
-      {/* 体験プログラム（ピックアップ） */}
-      <section className="bg-surface/50 py-20 md:py-28">
-        <div className="mx-auto max-w-content px-5 md:px-8">
-          <Reveal className="mb-10 text-center">
-            <p className="font-heading text-xs uppercase tracking-[0.3em] text-accent">
-              Experience Programs
-            </p>
-            <h2 className="text-fluid-h2 mt-4 font-heading font-bold">体験プログラム</h2>
-            <p className="text-fluid-lead mx-auto mt-4 max-w-2xl text-text-muted">
-              自然観察から海・川あそび、山歩き、島の文化まで。
-              奄美のいろいろな表情に出会う体験をご用意しています。
-            </p>
-          </Reveal>
-          <BentoGrid />
-          <div className="mt-10 text-center">
-            <Link
-              href="/tours"
-              className="inline-block rounded-full border border-accent px-7 py-3 text-sm font-medium text-accent transition-colors hover:bg-accent hover:text-white"
-            >
-              すべてのプログラムを見る
-            </Link>
-          </div>
         </div>
       </section>
 

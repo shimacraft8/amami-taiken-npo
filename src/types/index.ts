@@ -16,6 +16,8 @@ export type TimeOfDay = "昼" | "夜";
 
 /** 体験プログラム（料金・写真は扱わない方針） */
 export interface Tour {
+  /** 資料（活動内容一覧）と同じ通し番号（1〜15） */
+  no: number;
   /** URL スラッグ（/tours#<slug> 用） */
   slug: string;
   /** プログラム名 */
