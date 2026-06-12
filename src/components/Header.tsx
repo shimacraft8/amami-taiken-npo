@@ -6,25 +6,19 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { NAV_LINKS } from "@/lib/site";
 
+// ヘッダー固定背景色（スクロールでも変化しない）
+const HEADER_BG = "#f5f0e8";
+
 /**
- * グラスモーフィズムヘッダー。
- * - スクロール 0px：完全透明・テキスト白（全ページのヒーローが深色のため）
- * - スクロール 50px〜：backdrop-blur(20px) + 半透明背景 + 下線ボーダー
- * - 現在ページには layoutId による下線インジケーター
- * - モバイル：フルスクリーンオーバーレイ（メニューは縦中央寄せで上部ロゴと重ならない）
+ * ヘッダー（背景はベージュ #f5f0e8 で固定）。
+ * - 文字は常にダーク。モバイルのフルスクリーンメニュー表示中のみ白。
+ * - 団体名の右にアマミノクロウサギ動画（白背景素材 × mix-blend-mode: multiply）。
+ * - 現在ページには layoutId による下線インジケーター。
  */
 export function Header() {
   const pathname = usePathname();
   const reduce = useReducedMotion();
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   // ルート変更時にモバイルメニューを閉じる
   useEffect(() => {
@@ -39,28 +33,19 @@ export function Header() {
     };
   }, [open]);
 
-  const solid = scrolled || open;
-  const onDark = open || !solid; // テキストを白で出す条件
+  // メニュー（緑のフルスクリーン）表示中のみ、ロゴ／ハンバーガーを白に
+  const onDark = open;
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
     <header
-      className="fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-300"
-      style={
-        solid
-          ? {
-              backdropFilter: "blur(20px)",
-              WebkitBackdropFilter: "blur(20px)",
-              backgroundColor: "rgba(248,246,242,0.85)",
-              borderBottom: "1px solid rgba(45,90,78,0.15)",
-            }
-          : { backgroundColor: "transparent", borderBottom: "1px solid transparent" }
-      }
+      className="fixed inset-x-0 top-0 z-50"
+      style={{ backgroundColor: HEADER_BG, borderBottom: "1px solid rgba(45,90,78,0.15)" }}
     >
       <div className="mx-auto flex h-16 max-w-content items-center justify-between px-5 md:h-20 md:px-8">
         {/* ロゴ（団体名 ＋ 右にアマミノクロウサギの動画） */}
-        <Link href="/" className="group relative z-[60] flex items-center gap-2.5" aria-label="ホームへ">
+        <Link href="/" className="group relative z-[60] flex items-center gap-2" aria-label="ホームへ">
           <span className="flex flex-col leading-tight">
             <span
               className={`font-heading text-sm font-semibold tracking-wide transition-colors duration-300 ${
@@ -77,12 +62,11 @@ export function Header() {
               NPO Amami Nature
             </span>
           </span>
-          {/* アマミノクロウサギ（自動再生・ループ・ミュート）。
-              背景・被写体とも黒の素材のため、白リングで円形メダリオンとして縁取り
-              （透明 / クリームどちらのヘッダー背景でも視認できるように）。 */}
+          {/* アマミノクロウサギ（白背景素材を multiply でヘッダーに馴染ませる） */}
           <video
-            className="h-9 w-9 shrink-0 rounded-full bg-black object-cover ring-2 ring-white/70 shadow-sm md:h-11 md:w-11"
-            src="/amami-rabbit.mp4"
+            className="h-11 w-11 shrink-0 object-contain md:h-12 md:w-12"
+            style={{ mixBlendMode: "multiply", backgroundColor: HEADER_BG }}
+            src="/amami-rabbit-white.mp4"
             autoPlay
             loop
             muted
@@ -101,22 +85,14 @@ export function Header() {
                 href={link.href}
                 aria-current={active ? "page" : undefined}
                 className={`relative py-1.5 text-sm transition-colors hover:opacity-80 ${
-                  solid
-                    ? active
-                      ? "font-medium text-accent"
-                      : "text-text"
-                    : active
-                      ? "font-medium text-white"
-                      : "text-white/85"
+                  active ? "font-medium text-accent" : "text-text"
                 }`}
               >
                 {link.label}
                 {active && (
                   <motion.span
                     layoutId="nav-underline"
-                    className={`absolute -bottom-0.5 left-0 h-0.5 w-full rounded-full ${
-                      solid ? "bg-accent" : "bg-white"
-                    }`}
+                    className="absolute -bottom-0.5 left-0 h-0.5 w-full rounded-full bg-accent"
                     transition={
                       reduce ? { duration: 0 } : { type: "spring", stiffness: 400, damping: 32 }
                     }
@@ -140,7 +116,7 @@ export function Header() {
               <span
                 key={i}
                 className={`absolute left-0 block h-0.5 w-6 transition-all duration-300 ${
-                  open || !solid ? "bg-white" : "bg-text"
+                  open ? "bg-white" : "bg-text"
                 } ${
                   i === 0
                     ? open
@@ -176,7 +152,7 @@ export function Header() {
             }}
             aria-label="モバイルナビゲーション"
           >
-            {/* メニューは縦中央寄せ。上部余白(pt)でロゴ／閉じるボタンと重ならないようにする */}
+            {/* メニューは縦中央寄せ。上部余白でロゴ／閉じるボタンと重ならないようにする */}
             <motion.ul
               className="flex flex-1 flex-col justify-center gap-1 px-8 pb-16 pt-24"
               initial="hidden"
