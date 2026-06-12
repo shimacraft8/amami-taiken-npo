@@ -11,7 +11,7 @@ import { NAV_LINKS } from "@/lib/site";
  * - スクロール 0px：完全透明・テキスト白（全ページのヒーローが深色のため）
  * - スクロール 50px〜：backdrop-blur(20px) + 半透明背景 + 下線ボーダー
  * - 現在ページには layoutId による下線インジケーター
- * - モバイル：フルスクリーンオーバーレイ（スライドイン＋stagger）
+ * - モバイル：フルスクリーンオーバーレイ（メニューは縦中央寄せで上部ロゴと重ならない）
  */
 export function Header() {
   const pathname = usePathname();
@@ -40,6 +40,7 @@ export function Header() {
   }, [open]);
 
   const solid = scrolled || open;
+  const onDark = open || !solid; // テキストを白で出す条件
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
@@ -58,24 +59,36 @@ export function Header() {
       }
     >
       <div className="mx-auto flex h-16 max-w-content items-center justify-between px-5 md:h-20 md:px-8">
-        {/* ロゴ（文字のみ・円バッジは廃止） */}
-        <Link href="/" className="group relative z-[60] flex items-center" aria-label="ホームへ">
+        {/* ロゴ（団体名 ＋ 右にアマミノクロウサギの動画） */}
+        <Link href="/" className="group relative z-[60] flex items-center gap-2.5" aria-label="ホームへ">
           <span className="flex flex-col leading-tight">
             <span
               className={`font-heading text-sm font-semibold tracking-wide transition-colors duration-300 ${
-                solid && !open ? "text-text" : "text-white"
+                onDark ? "text-white" : "text-text"
               }`}
             >
               奄美大島自然体験活動協議会
             </span>
             <span
               className={`font-heading text-[10px] uppercase tracking-[0.25em] transition-colors duration-300 ${
-                solid && !open ? "text-text-muted" : "text-white/70"
+                onDark ? "text-white/70" : "text-text-muted"
               }`}
             >
               NPO Amami Nature
             </span>
           </span>
+          {/* アマミノクロウサギ（自動再生・ループ・ミュート）。
+              背景・被写体とも黒の素材のため、白リングで円形メダリオンとして縁取り
+              （透明 / クリームどちらのヘッダー背景でも視認できるように）。 */}
+          <video
+            className="h-9 w-9 shrink-0 rounded-full bg-black object-cover ring-2 ring-white/70 shadow-sm md:h-11 md:w-11"
+            src="/amami-rabbit.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            aria-hidden
+          />
         </Link>
 
         {/* PC ナビ */}
@@ -112,16 +125,6 @@ export function Header() {
               </Link>
             );
           })}
-          <Link
-            href="/contact"
-            className={`rounded-full px-5 py-2 text-sm font-medium shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md ${
-              solid
-                ? "bg-accent text-white hover:bg-accent-soft"
-                : "bg-white text-accent hover:bg-white/90"
-            }`}
-          >
-            体験を予約する
-          </Link>
         </nav>
 
         {/* モバイル：ハンバーガー */}
@@ -173,8 +176,9 @@ export function Header() {
             }}
             aria-label="モバイルナビゲーション"
           >
+            {/* メニューは縦中央寄せ。上部余白(pt)でロゴ／閉じるボタンと重ならないようにする */}
             <motion.ul
-              className="mt-28 flex flex-col gap-1 px-8"
+              className="flex flex-1 flex-col justify-center gap-1 px-8 pb-16 pt-24"
               initial="hidden"
               animate="visible"
               variants={{
@@ -199,11 +203,11 @@ export function Header() {
                     <Link
                       href={link.href}
                       aria-current={active ? "page" : undefined}
-                      className={`flex items-baseline gap-3 border-b border-white/10 py-4 ${
+                      className={`flex items-center gap-3 border-b border-white/10 py-4 ${
                         active ? "text-white" : "text-white/75"
                       }`}
                     >
-                      <span className="font-heading text-[10px] uppercase tracking-[0.25em] text-white/50">
+                      <span className="w-16 shrink-0 font-heading text-[10px] uppercase tracking-[0.2em] text-white/50">
                         {link.labelEn}
                       </span>
                       <span className="font-heading text-2xl font-semibold">{link.label}</span>
@@ -215,20 +219,6 @@ export function Header() {
                 );
               })}
             </motion.ul>
-
-            <motion.div
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.5 }}
-              className="mt-auto px-8 pb-12"
-            >
-              <Link
-                href="/contact"
-                className="block rounded-full bg-white px-6 py-4 text-center text-base font-medium text-accent"
-              >
-                体験を予約する
-              </Link>
-            </motion.div>
           </motion.nav>
         )}
       </AnimatePresence>

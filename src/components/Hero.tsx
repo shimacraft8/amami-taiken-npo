@@ -158,7 +158,7 @@ export function Hero() {
           variants={fadeUp}
           className="text-fluid-lead mt-7 max-w-xl text-white/90"
         >
-          世界自然遺産の島で、認定ネイチャーガイドと歩く。
+          世界自然遺産の島で、認定ガイドと歩く。
           森の奥、夜の気配、水辺のにぎわい——奄美にしかない自然のものがたりを、
           安全に、ていねいにご案内します。
         </motion.p>

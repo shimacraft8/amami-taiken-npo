@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { Car, ParkingCircle, Phone, Plane } from "lucide-react";
+import { Car, ParkingCircle, Plane } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
 import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 import { CONTACT_INFO, ORG_NAME_FULL, SITE_URL, TEL_HREF } from "@/lib/site";
@@ -35,15 +34,9 @@ const transports = [
   },
 ];
 
-const meetingSteps = [
-  "ご予約確定時に、集合場所の地図と駐車場のご案内をお送りします。",
-  "当日は開始時刻の10分前までに事務所へお集まりください。",
-  "受付・装備の確認のあと、ガイドと一緒にフィールドへ出発します。",
-];
-
 export default function AccessPage() {
-  // 住所をマップ検索クエリに（住用町役勝）
-  const mapQuery = encodeURIComponent("鹿児島県奄美市住用町役勝");
+  // 事務所の正確な住所でピンを立て、ズームを上げる
+  const mapQuery = encodeURIComponent("鹿児島県奄美市住用町大字役勝7番地");
 
   return (
     <>
@@ -54,34 +47,41 @@ export default function AccessPage() {
         tone="water"
       />
 
+      {/* 所在地：地図 ＋ 基本情報 */}
       <section className="mx-auto max-w-content px-5 py-20 md:px-8 md:py-28">
-        <div className="grid gap-12 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
+        <Reveal className="mb-8">
+          <h2 className="text-fluid-h3 font-heading font-bold">所在地</h2>
+        </Reveal>
+        <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
           <Reveal variant="fadeInLeft">
-            <h2 className="text-fluid-h3 font-heading font-bold">所在地</h2>
-            <div className="mt-5 overflow-hidden rounded-3xl border border-border shadow-card">
+            <div className="overflow-hidden rounded-3xl border border-border shadow-card">
               <iframe
-                src={`https://www.google.com/maps?q=${mapQuery}&output=embed&z=12`}
-                title="奄美市住用町役勝 周辺の地図"
-                className="h-72 w-full md:h-80"
+                src={`https://www.google.com/maps?q=${mapQuery}&z=17&output=embed`}
+                title="奄美大島自然体験活動協議会 事務所周辺の地図"
+                className="h-72 w-full md:h-[26rem]"
                 style={{ border: 0 }}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 allowFullScreen
               />
             </div>
+          </Reveal>
 
-            <dl className="mt-6 space-y-3 rounded-2xl border border-border bg-surface p-6 text-sm">
-              <div className="flex gap-3">
+          <Reveal variant="fadeInRight" delay={0.1}>
+            <dl className="space-y-4 rounded-3xl border border-border bg-surface p-7 text-sm md:p-8">
+              <div className="flex gap-4">
                 <dt className="w-20 shrink-0 text-text-muted">名称</dt>
                 <dd className="font-medium">{ORG_NAME_FULL}</dd>
               </div>
-              <div className="flex gap-3">
+              <div className="flex gap-4">
                 <dt className="w-20 shrink-0 text-text-muted">所在地</dt>
                 <dd className="font-medium">
-                  {CONTACT_INFO.postal} {CONTACT_INFO.address}
+                  {CONTACT_INFO.postal}
+                  <br />
+                  {CONTACT_INFO.address}
                 </dd>
               </div>
-              <div className="flex gap-3">
+              <div className="flex gap-4">
                 <dt className="w-20 shrink-0 text-text-muted">電話</dt>
                 <dd className="font-medium">
                   <a href={TEL_HREF} className="text-accent hover:underline">
@@ -89,54 +89,20 @@ export default function AccessPage() {
                   </a>
                 </dd>
               </div>
-              <div className="flex gap-3">
+              <div className="flex gap-4">
+                <dt className="w-20 shrink-0 text-text-muted">メール</dt>
+                <dd className="font-medium break-all">{CONTACT_INFO.email}</dd>
+              </div>
+              <div className="flex gap-4">
                 <dt className="w-20 shrink-0 text-text-muted">受付</dt>
                 <dd className="font-medium">{CONTACT_INFO.hours}</dd>
               </div>
             </dl>
           </Reveal>
-
-          {/* 集合までの流れ */}
-          <Reveal variant="fadeInRight" delay={0.1}>
-            <h2 className="text-fluid-h3 font-heading font-bold">集合までの流れ</h2>
-            <p className="mt-2 text-sm text-text-muted">
-              プログラムや季節・潮位により集合時間が変わります。
-            </p>
-            <ol className="mt-5 space-y-4">
-              {meetingSteps.map((step, i) => (
-                <li
-                  key={i}
-                  className="flex items-start gap-4 rounded-2xl border border-border bg-surface p-5 shadow-card"
-                >
-                  <span
-                    aria-hidden
-                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent font-heading text-sm font-bold text-white"
-                  >
-                    {i + 1}
-                  </span>
-                  <p className="pt-1.5 text-sm leading-relaxed text-text-muted">{step}</p>
-                </li>
-              ))}
-            </ol>
-
-            <div className="mt-8 rounded-2xl bg-accent/5 p-6">
-              <h3 className="font-heading text-base font-semibold">集合時間のご相談</h3>
-              <p className="mt-2 text-sm leading-relaxed text-text-muted">
-                飛行機やフェリーの到着時刻に合わせた調整も可能です。お気軽にお電話ください。
-              </p>
-              <a
-                href={TEL_HREF}
-                className="mt-4 inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-medium text-white transition-transform hover:-translate-y-0.5"
-              >
-                <Phone size={15} aria-hidden />
-                {CONTACT_INFO.tel}
-              </a>
-            </div>
-          </Reveal>
         </div>
       </section>
 
-      {/* 交通手段：3カラム */}
+      {/* 交通・駐車場：3カラム */}
       <section className="bg-surface/50 py-20 md:py-28">
         <div className="mx-auto max-w-content px-5 md:px-8">
           <Reveal className="mb-10 text-center">

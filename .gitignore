@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# 制作用ソース素材（成果物は public/ に配置）
+/deta/
