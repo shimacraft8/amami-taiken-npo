@@ -15,6 +15,18 @@ export const REPRESENTATIVE = "久保 公";
 // TODO: クライアント確認（本番ドメイン確定後に差し替え。既存 amami-taiken.com を使う場合はそのURLへ）
 export const SITE_URL = "https://amami-taiken-npo-pi.vercel.app";
 
+/**
+ * 検索エンジンのインデックス許可フラグ。
+ * 本番(production)環境で、かつ NEXT_PUBLIC_ALLOW_INDEX=true のときだけ true。
+ * → プレビュー/staging は常に noindex、ローカル(VERCEL_ENV 未定義)も noindex。
+ *
+ * 【公開時】Vercel の Production 環境変数に  NEXT_PUBLIC_ALLOW_INDEX=true  を設定すると
+ *          本番のみインデックス許可になります（再デプロイが必要）。
+ */
+export const allowIndex =
+  process.env.VERCEL_ENV === "production" &&
+  process.env.NEXT_PUBLIC_ALLOW_INDEX === "true";
+
 export const ORG_DESCRIPTION =
   "世界自然遺産・奄美大島の希少な動植物と固有の生態系を守りながら、自然体験活動を通じてその魅力を伝える特定非営利活動法人です。認定ガイドが森・川・海・島の文化まで多彩な体験をご案内します。";
 

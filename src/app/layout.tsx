@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import { StickyContact } from "@/components/StickyContact";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import {
+  allowIndex,
   CONTACT_INFO,
   ORG_DESCRIPTION,
   ORG_NAME,
@@ -59,9 +60,9 @@ export const metadata: Metadata = {
     title: ORG_NAME,
     description: ORG_DESCRIPTION,
   },
-  // レビュー公開のため検索エンジンから除外
-  // TODO: 承認後に index 許可へ戻す（robots.ts と合わせて解除）
-  robots: { index: false, follow: false },
+  // インデックス可否は環境変数で自動判定（allowIndex）。
+  // 本番(production) かつ NEXT_PUBLIC_ALLOW_INDEX=true のときだけ許可、それ以外は noindex。
+  robots: { index: allowIndex, follow: allowIndex },
 };
 
 // 構造化データ：団体（schema.org/NGO）
