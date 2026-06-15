@@ -62,17 +62,6 @@ export function Header() {
               NPO Amami Nature
             </span>
           </span>
-          {/* アマミノクロウサギ（白背景素材を multiply でヘッダーに馴染ませる） */}
-          <video
-            className="h-11 w-11 shrink-0 object-contain md:h-12 md:w-12"
-            style={{ mixBlendMode: "multiply", backgroundColor: HEADER_BG }}
-            src="/amami-rabbit-white.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
-            aria-hidden
-          />
         </Link>
 
         {/* PC ナビ */}

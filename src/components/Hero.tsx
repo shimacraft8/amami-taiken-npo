@@ -19,8 +19,6 @@ import {
  * - 下部に pulse アニメーションのスクロール誘導ドット
  */
 
-// feTurbulence によるノイズテクスチャ（データURI・依存なし）
-const NOISE_SVG = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E")`;
 
 // 見出し（単語単位で stagger させる）
 const TITLE_LINES: string[][] = [
@@ -70,43 +68,37 @@ export function Hero() {
       className="relative flex min-h-[100svh] items-center overflow-hidden"
       aria-label="奄美大島自然体験活動協議会 メインビジュアル"
     >
-      {/* ===== 背景（CSS only） ===== */}
+      {/* ===== 背景（動画） ===== */}
       <motion.div
         aria-hidden
         className="absolute inset-0 -z-10 will-change-transform"
         style={reduce ? undefined : { y: bgY }}
       >
-        {/* 深緑のレイヤードグラデーション：奄美の森のイメージ */}
-        {/* TODO: 実画像差し替え（原生林のワイド写真が用意でき次第 next/image に置換） */}
-        <div
-          className="absolute inset-0 scale-110"
-          style={{
-            background: [
-              "radial-gradient(110% 90% at 85% 8%, rgba(111,168,144,0.5) 0%, rgba(111,168,144,0) 55%)",
-              "radial-gradient(120% 100% at 10% 100%, rgba(10,30,24,0.95) 0%, rgba(20,52,44,0.5) 60%, rgba(20,52,44,0) 100%)",
-              "linear-gradient(160deg, #16332b 0%, #2d5a4e 48%, #1c4038 78%, #122922 100%)",
-            ].join(", "),
-          }}
-        />
-        {/* ノイズテクスチャ重ね */}
-        <div
-          className="absolute inset-0 opacity-[0.22] mix-blend-overlay"
-          style={{ backgroundImage: NOISE_SVG }}
-        />
-        {/* 木漏れ日の光条 */}
-        <div
-          className="absolute inset-0 opacity-30"
-          style={{
-            background:
-              "linear-gradient(115deg, transparent 38%, rgba(214,255,235,0.14) 44%, transparent 50%, rgba(214,255,235,0.08) 58%, transparent 64%)",
-          }}
-        />
-        {/* 可読性のための下部減光 */}
+        {/* パララックス移動中にエッジが見えないよう拡大コンテナ */}
+        <div className="absolute -inset-[25%]">
+          <video
+            className="h-full w-full object-cover"
+            src="/hero-bg.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+          />
+        </div>
+        {/* テキスト可読性オーバーレイ */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(180deg, rgba(8,18,14,0.35) 0%, rgba(8,18,14,0.05) 45%, rgba(8,18,14,0.55) 100%)",
+              "linear-gradient(180deg, rgba(8,18,14,0.45) 0%, rgba(8,18,14,0.2) 45%, rgba(8,18,14,0.7) 100%)",
+          }}
+        />
+        {/* 光条（雰囲気付け） */}
+        <div
+          className="absolute inset-0 opacity-20"
+          style={{
+            background:
+              "linear-gradient(115deg, transparent 38%, rgba(214,255,235,0.14) 44%, transparent 50%, rgba(214,255,235,0.08) 58%, transparent 64%)",
           }}
         />
       </motion.div>
