@@ -12,8 +12,7 @@ export const ORG_NAME_EN = "Amami Oshima Nature Experience Council";
 // 代表者（理事長）
 export const REPRESENTATIVE = "久保 公";
 
-// TODO: カスタムドメイン確定後に差し替え（現在は Vercel 仮URL）
-export const SITE_URL = "https://amami-taiken-npo-sage.vercel.app";
+export const SITE_URL = "https://amamitaiken.com";
 
 /**
  * 検索エンジンのインデックス許可フラグ。
