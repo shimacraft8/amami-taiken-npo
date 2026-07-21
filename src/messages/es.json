@@ -1,0 +1,236 @@
+{
+  "common": {
+    "tel": "0997-69-2189",
+    "email": "mangrove@amami-taiken.com",
+    "hours": "9:00–18:00 (abierto todo el año)",
+    "postal": "〒894-1201",
+    "address": "7 Yakugachi, Sumiyou-cho, Ciudad de Amami, Kagoshima"
+  },
+  "nav": {
+    "home": "Inicio",
+    "about": "Quiénes Somos",
+    "tours": "Programas",
+    "access": "Cómo Llegar",
+    "contact": "Contacto / Reserva"
+  },
+  "langSwitcher": {
+    "label": "Idioma"
+  },
+  "hero": {
+    "eyebrow": "Patrimonio Natural Mundial · Amami Ōshima",
+    "titleLine1": "Descubre la vida",
+    "titleLine2": "en Amami.",
+    "lead": "En una isla declarada Patrimonio Natural de la UNESCO, explora la naturaleza con guías certificados. Te ofrecemos viajes seguros y cuidadosos por bosques, fauna nocturna y costas vibrantes — historias que solo Amami puede contar.",
+    "ctaTours": "Ver Programas",
+    "ctaContact": "Hacer una Reserva"
+  },
+  "home": {
+    "missionEyebrow": "Our Mission",
+    "missionH2Line1": "Conocer la naturaleza,",
+    "missionH2Line2": "preservarla.",
+    "missionBody1": "Somos una ONG dedicada a proteger la fauna, flora y ecosistemas únicos de Amami Ōshima y sus islas vecinas, compartiendo su importancia a través de experiencias en la naturaleza e intercambio cultural.",
+    "missionBody2": "Amami fue designada Patrimonio Natural Mundial de la UNESCO en 2021. A medida que aumentan los visitantes, trabajamos con guías certificados para promover un turismo sostenible que minimice el impacto ambiental.",
+    "missionLink": "Conoce más sobre nosotros →",
+    "ctaH2": "Ven a conocer la naturaleza de Amami.",
+    "ctaLead": "Reservas e informes por teléfono. No dudes en consultarnos sobre la selección de programas.",
+    "ctaMail": "Contactar por correo",
+    "ctaHours": "Horario: {hours}"
+  },
+  "about": {
+    "eyebrow": "About Us",
+    "title": "Quiénes Somos",
+    "lead": "Una ONG que protege la naturaleza única de Amami y comparte su encanto a través de experiencias e intercambio cultural.",
+    "missionEyebrow": "Mission",
+    "missionH2": "Nuestra Misión",
+    "missionLead": "Amami Ōshima fue declarada Patrimonio Natural Mundial en 2021. Con el aumento de visitantes previsto, abordamos la naturaleza de la isla desde tres perspectivas como organización civil.",
+    "missions": {
+      "conservation": {
+        "en": "Conservation",
+        "title": "Conservación Ambiental",
+        "body": "Trabajamos para proteger las plantas, animales endémicos y ecosistemas únicos de Amami Ōshima, preservándolos para las generaciones futuras."
+      },
+      "experience": {
+        "en": "Experience",
+        "title": "Experiencia y Educación",
+        "body": "Planificamos y operamos eventos de observación y experiencia, brindando oportunidades de conexión con la naturaleza y la cultura, difundiendo su importancia."
+      },
+      "research": {
+        "en": "Research",
+        "title": "Investigación y Comunicación",
+        "body": "Realizamos investigaciones sobre flora, fauna y ecosistemas, compartiendo los hallazgos a través de nuestro sitio web y redes sociales."
+      }
+    },
+    "historyEyebrow": "History",
+    "historyH2": "Historia",
+    "history": [
+      { "year": "Sept. 2017", "text": "Hiroshi Kubo y colaboradores iniciaron sesiones de estudio sobre protección ambiental en Amami." },
+      { "year": "Sept. 2017", "text": "Se celebró una reunión fundacional para determinar la misión, estatutos y plan de negocio." },
+      { "year": "Oct. 2017", "text": "Se celebró la asamblea inaugural. Se aprobó la constitución de la corporación y sus directivos." },
+      { "year": "Mar. 2018", "text": "Constituida como organización sin fines de lucro (NPO) especificada (registro de constitución)." },
+      { "year": "Actualidad", "text": "Continuamos con programas de experiencia en la naturaleza con guías certificados, junto con actividades de investigación y sensibilización." }
+    ],
+    "orgEyebrow": "Organization",
+    "orgH2": "Información de la Organización",
+    "orgTable": {
+      "name": "Organización",
+      "representative": "Director",
+      "address": "Dirección",
+      "established": "Fundación",
+      "tel": "Teléfono",
+      "email": "Correo",
+      "activities": "Actividades",
+      "area": "Área de Servicio",
+      "representativeValue": "Presidente: Hiroshi Kubo",
+      "activitiesValue": "Planificación y operación de actividades de experiencia/observación en la naturaleza / Investigación de fauna y ecosistemas / Sensibilización ambiental e intercambio cultural",
+      "areaValue": "Amami Ōshima e islas circundantes"
+    },
+    "contactLink": "Consultar sobre nuestras actividades"
+  },
+  "tours": {
+    "eyebrow": "Experience Programs",
+    "title": "Programas de Experiencia",
+    "lead": "Desde observación de fauna hasta actividades en mar y río, senderismo y cultura isleña — presentamos los encantos de Amami de muchas formas.",
+    "reservationText": "Reservas y solicitudes por teléfono. No dudes en consultar sobre el contenido, duración, precios y más.",
+    "reservationTextBold": "teléfono",
+    "note": "※ El contenido y los horarios de los programas pueden cambiar debido al clima, estaciones, mareas, etc. Llama para confirmar la disponibilidad.",
+    "filters": {
+      "all": "Todos",
+      "自然観察": "Naturaleza",
+      "海・川": "Mar y Río",
+      "山・森": "Bosque",
+      "島の文化": "Cultura Isleña",
+      "その他": "Otros"
+    },
+    "filterAriaLabel": "Filtrar por categoría",
+    "categories": {
+      "自然観察": "Naturaleza",
+      "海・川": "Mar y Río",
+      "山・森": "Bosque",
+      "島の文化": "Cultura Isleña",
+      "アウトドア": "Aire Libre",
+      "撮影": "Fotografía"
+    },
+    "timeOfDay": {
+      "昼": "Día",
+      "夜": "Noche"
+    },
+    "programNoLabel": "Programa N°",
+    "programs": {
+      "wildlife-watching": {
+        "title": "Observación de Fauna Silvestre",
+        "summary": "Observa el raro conejo negro de Amami y otros animales endémicos únicos de la isla, con encuentros tanto diurnos como nocturnos."
+      },
+      "sea-kayak-canoe": {
+        "title": "Kayak de Mar y Canoa en Río",
+        "summary": "Explora bahías tranquilas y ríos de manglares en kayak o canoa — un programa popular con una perspectiva única a nivel del agua."
+      },
+      "river-play": {
+        "title": "Diversión en el Río",
+        "summary": "Pasa un tiempo refrescante en arroyos cristalinos buscando criaturas del río. Ideal para familias con niños."
+      },
+      "diving-snorkeling": {
+        "title": "Buceo y Esnórquel",
+        "summary": "Sumérgete en el mundo submarino de Amami con sus vibrantes arrecifes de coral y coloridos peces tropicales."
+      },
+      "tidepool": {
+        "title": "Exploración de Pozas de Marea",
+        "summary": "Asómate a las pozas de marea para descubrir el animado mundo de las pequeñas criaturas marinas. Una maravillosa oportunidad de observación."
+      },
+      "fishing": {
+        "title": "Pesca en Barco y Costa",
+        "summary": "Pesca en las ricas aguas de Amami — desde un barco o la costa rocosa. Experimenta la alegría de pescar y la generosidad del mar."
+      },
+      "trekking": {
+        "title": "Senderismo por la Montaña",
+        "summary": "Camina por bosques subtropicales, percibiendo plantas endémicas y el espíritu del bosque. Rutas aptas para principiantes disponibles."
+      },
+      "island-food": {
+        "title": "Experiencia Gastronómica Isleña",
+        "summary": "Recoge y degusta ingredientes locales especiales de Amami. Una experiencia inmersiva en la cultura culinaria y el modo de vida de la isla."
+      },
+      "shima-uta": {
+        "title": "Shima-uta, Danza y Sanshin",
+        "summary": "Experimenta las canciones tradicionales, danzas, dialecto local y sanshin (laúd) transmitidos de generación en generación en Amami."
+      },
+      "town-walk": {
+        "title": "Paseo por el Pueblo Isleño",
+        "summary": "Recorre el pueblo siguiendo la historia, cultura y artesanías tradicionales de la isla como el teñido en barro y el tejido."
+      },
+      "old-trail": {
+        "title": "Ruta por Caminos Antiguos",
+        "summary": "Sigue viejos caminos que alguna vez transitaron los locales, reflexionando sobre la historia de vida en Amami."
+      },
+      "camp": {
+        "title": "Experiencia de Camping",
+        "summary": "Pasa una noche en la naturaleza bajo las estrellas, rodeado de los sonidos de la noche en Amami — una experiencia al aire libre única."
+      },
+      "island-life": {
+        "title": "Estancia con Familia Local",
+        "summary": "Quédate con una familia local y experimenta el ritmo de la vida isleña. Las conexiones que hagas se convierten en recuerdos preciados."
+      },
+      "whale-watching": {
+        "title": "Avistamiento de Ballenas",
+        "summary": "Conoce las ballenas que visitan las aguas de Amami desde invierno hasta primavera. Observa su majestuosa presencia desde la cubierta de un barco."
+      },
+      "location-coordinate": {
+        "title": "Coordinación de Locaciones",
+        "summary": "Desde la búsqueda de locaciones hasta los arreglos in situ para todo tipo de rodajes. Nuestro equipo, experto en la naturaleza de Amami, te apoyará."
+      }
+    }
+  },
+  "access": {
+    "eyebrow": "Access",
+    "title": "Cómo Llegar",
+    "lead": "Información sobre la ubicación de nuestra oficina, opciones de transporte y estacionamiento.",
+    "locationH2": "Ubicación",
+    "mapTitle": "Mapa del área de la oficina del Consejo de Experiencias en la Naturaleza de Amami",
+    "dlName": "Organización",
+    "dlAddress": "Dirección",
+    "dlTel": "Teléfono",
+    "dlEmail": "Correo",
+    "dlHours": "Horario",
+    "transportEyebrow": "Transportation",
+    "transportH2": "Transporte y Estacionamiento",
+    "transports": {
+      "plane": {
+        "title": "En Avión",
+        "body": "Desde el Aeropuerto de Amami, dirígete hacia Sumiyou-cho en auto. Hay vuelos directos desde las principales ciudades, con conexión en el Aeropuerto de Kagoshima."
+      },
+      "car": {
+        "title": "En Auto",
+        "body": "El auto de alquiler es la forma más conveniente de moverse por la isla. Las instrucciones detalladas al punto de encuentro se proporcionarán al confirmar la reserva."
+      },
+      "parking": {
+        "title": "Estacionamiento",
+        "body": "Contamos con espacios de estacionamiento en nuestra oficina. Puedes llegar directamente en auto."
+      }
+    }
+  },
+  "contact": {
+    "eyebrow": "Contact / Reservation",
+    "title": "Contacto / Reserva",
+    "lead": "El teléfono es la forma más confiable de hacer reservas y consultas. No dudes en contactarnos.",
+    "phoneEyebrow": "Reservation by Phone",
+    "phoneH2": "Reservas por Teléfono",
+    "phoneHours": "Horario: {hours}",
+    "cardContactH2": "Contacto",
+    "cardAddressH2": "Dirección",
+    "cardNotesH2": "Notas de Reserva",
+    "cardHours": "Horario: {hours}",
+    "notes": [
+      "El contenido y los horarios pueden cambiar debido al clima, mareas, etc.",
+      "Para reservas el mismo día o el día anterior, llama por teléfono.",
+      "También se aceptan consultas por correo electrónico."
+    ]
+  },
+  "footer": {
+    "description": "Protegiendo la naturaleza única del Patrimonio Natural Mundial Amami Ōshima para el futuro. Con atención a la conservación y compromiso con la seguridad, ofrecemos diversas experiencias en la naturaleza, desde bosques y ríos hasta el mar y la cultura isleña.",
+    "sitemap": "Mapa del Sitio",
+    "contactSection": "Contacto",
+    "hours": "Horario: {hours}",
+    "contactLink": "Contacto / Reserva"
+  },
+  "splash": {
+    "ariaLabel": "Cargando"
+  }
+}

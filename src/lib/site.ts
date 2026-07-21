@@ -30,11 +30,11 @@ export const ORG_DESCRIPTION =
   "世界自然遺産・奄美大島の希少な動植物と固有の生態系を守りながら、自然体験活動を通じてその魅力を伝える特定非営利活動法人です。認定ガイドが森・川・海・島の文化まで多彩な体験をご案内します。";
 
 export const NAV_LINKS = [
-  { href: "/", label: "ホーム", labelEn: "Home" },
-  { href: "/about", label: "私たちについて", labelEn: "About" },
-  { href: "/tours", label: "体験プログラム", labelEn: "Tours" },
-  { href: "/access", label: "アクセス", labelEn: "Access" },
-  { href: "/contact", label: "お問い合わせ・予約", labelEn: "Contact" },
+  { href: "/", label: "ホーム", labelEn: "Home", labelKey: "home" as const },
+  { href: "/about", label: "私たちについて", labelEn: "About", labelKey: "about" as const },
+  { href: "/tours", label: "体験プログラム", labelEn: "Tours", labelKey: "tours" as const },
+  { href: "/access", label: "アクセス", labelEn: "Access", labelKey: "access" as const },
+  { href: "/contact", label: "お問い合わせ・予約", labelEn: "Contact", labelKey: "contact" as const },
 ] as const;
 
 // 団体の基本情報（実データ）

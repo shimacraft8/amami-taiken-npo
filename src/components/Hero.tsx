@@ -1,7 +1,8 @@
 "use client";
 
 import { useRef } from "react";
-import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import {
   motion,
   useReducedMotion,
@@ -10,18 +11,7 @@ import {
   type Variants,
 } from "framer-motion";
 
-/**
- * フルスクリーンヒーロー。
- * - 背景は CSS グラデーション＋SVG ノイズテクスチャ（外部画像不要・著作権フリー）
- *   ※ TODO: 実画像差し替え（奄美の原生林・フリー素材または提供写真に置換可）
- * - 見出しは単語ごとに下から stagger で浮き上がる
- * - スクロール連動パララックス（useScroll + useTransform）
- * - 下部に pulse アニメーションのスクロール誘導ドット
- */
-
-
-// 見出し（単語単位で stagger させる）
-const TITLE_LINES: string[][] = [
+const JA_TITLE_LINES: string[][] = [
   ["奄美の", "いのちと、"],
   ["出会う", "旅へ。"],
 ];
@@ -52,15 +42,21 @@ const fadeUp: Variants = {
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
+  const locale = useLocale();
+  const t = useTranslations("hero");
 
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
   });
-  // パララックス：背景はゆっくり、前景テキストは少し速く流す
   const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "22%"]);
   const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "-18%"]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+
+  const isJa = locale === "ja";
+  const titleLines = isJa
+    ? JA_TITLE_LINES
+    : [[t("titleLine1")], [t("titleLine2")]];
 
   return (
     <section
@@ -68,13 +64,12 @@ export function Hero() {
       className="relative flex min-h-[100svh] items-center overflow-hidden"
       aria-label="奄美大島自然体験活動協議会 メインビジュアル"
     >
-      {/* ===== 背景（動画） ===== */}
+      {/* 背景（動画） */}
       <motion.div
         aria-hidden
         className="absolute inset-0 -z-10 will-change-transform"
         style={reduce ? undefined : { y: bgY }}
       >
-        {/* パララックス移動中にエッジが見えないよう拡大コンテナ */}
         <div className="absolute -inset-[25%]">
           <video
             className="h-full w-full object-cover"
@@ -85,7 +80,6 @@ export function Hero() {
             playsInline
           />
         </div>
-        {/* テキスト可読性オーバーレイ */}
         <div
           className="absolute inset-0"
           style={{
@@ -93,7 +87,6 @@ export function Hero() {
               "linear-gradient(180deg, rgba(8,18,14,0.45) 0%, rgba(8,18,14,0.2) 45%, rgba(8,18,14,0.7) 100%)",
           }}
         />
-        {/* 光条（雰囲気付け） */}
         <div
           className="absolute inset-0 opacity-20"
           style={{
@@ -103,7 +96,7 @@ export function Hero() {
         />
       </motion.div>
 
-      {/* ===== コンテンツ ===== */}
+      {/* コンテンツ */}
       <motion.div
         className="mx-auto w-full max-w-content px-5 pb-28 pt-28 md:px-8"
         style={reduce ? undefined : { y: contentY, opacity: contentOpacity }}
@@ -115,10 +108,9 @@ export function Hero() {
           variants={fadeUp}
           className="font-heading text-xs uppercase tracking-[0.35em] text-white/80 md:text-sm"
         >
-          World Natural Heritage · Amami Ōshima
+          {t("eyebrow")}
         </motion.p>
 
-        {/* 流体タイポ＋単語 stagger */}
         <motion.h1
           initial={reduce ? false : "hidden"}
           animate="visible"
@@ -130,11 +122,17 @@ export function Hero() {
             letterSpacing: "-0.02em",
           }}
         >
-          {TITLE_LINES.map((line, li) => (
+          {titleLines.map((line, li) => (
             <span key={li} className="block">
               {line.map((w) => (
-                <span key={w} className="inline-block overflow-hidden pb-[0.08em] align-bottom">
-                  <motion.span variants={word} className="inline-block will-change-transform">
+                <span
+                  key={w}
+                  className="inline-block overflow-hidden pb-[0.08em] align-bottom"
+                >
+                  <motion.span
+                    variants={word}
+                    className="inline-block will-change-transform"
+                  >
                     {w}
                   </motion.span>
                 </span>
@@ -150,9 +148,7 @@ export function Hero() {
           variants={fadeUp}
           className="text-fluid-lead mt-7 max-w-xl text-white/90"
         >
-          世界自然遺産の島で、認定ガイドと歩く。
-          森の奥、夜の気配、水辺のにぎわい——奄美にしかない自然のものがたりを、
-          安全に、ていねいにご案内します。
+          {t("lead")}
         </motion.p>
 
         <motion.div
@@ -166,18 +162,18 @@ export function Hero() {
             href="/tours"
             className="rounded-full bg-white px-7 py-3.5 text-sm font-medium text-accent shadow-lg transition-transform duration-300 ease-smooth hover:-translate-y-1"
           >
-            体験プログラムを見る
+            {t("ctaTours")}
           </Link>
           <Link
             href="/contact"
             className="rounded-full border border-white/70 px-7 py-3.5 text-sm font-medium text-white backdrop-blur-sm transition-colors hover:bg-white/10"
           >
-            体験を予約する
+            {t("ctaContact")}
           </Link>
         </motion.div>
       </motion.div>
 
-      {/* ===== スクロール誘導（pulse ドット） ===== */}
+      {/* スクロール誘導 */}
       <motion.div
         aria-hidden
         initial={{ opacity: 0 }}

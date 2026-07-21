@@ -1,0 +1,236 @@
+{
+  "common": {
+    "tel": "0997-69-2189",
+    "email": "mangrove@amami-taiken.com",
+    "hours": "9:00–18:00（全年无休）",
+    "postal": "〒894-1201",
+    "address": "鹿儿岛县奄美市住用町大字役胜7番地"
+  },
+  "nav": {
+    "home": "首页",
+    "about": "关于我们",
+    "tours": "体验项目",
+    "access": "交通信息",
+    "contact": "联系与预约"
+  },
+  "langSwitcher": {
+    "label": "语言"
+  },
+  "hero": {
+    "eyebrow": "世界自然遗产 · 奄美大岛",
+    "titleLine1": "邂逅奄美，",
+    "titleLine2": "遇见生命。",
+    "lead": "在被列为联合国教科文组织世界自然遗产的岛屿上，与认证向导一同探索自然。我们为您提供安全、细致的旅程——穿越原始森林、体验夜间野生动物、感受活力海岸，讲述只有奄美才有的自然故事。",
+    "ctaTours": "查看体验项目",
+    "ctaContact": "立即预约"
+  },
+  "home": {
+    "missionEyebrow": "Our Mission",
+    "missionH2Line1": "了解自然，",
+    "missionH2Line2": "传承未来。",
+    "missionBody1": "我们是一家NPO法人，致力于保护奄美大岛及周边地区珍稀动植物和特有生态系统，并通过自然体验和文化交流，让更多人了解其重要性。",
+    "missionBody2": "奄美于2021年被列为世界自然遗产。随着访客增加，我们与向导团队携手，持续推广将对自然影响降至最低的「可持续体验」方式。",
+    "missionLink": "了解更多关于我们 →",
+    "ctaH2": "来奄美，遇见大自然。",
+    "ctaLead": "预约和咨询请致电我们。欢迎随时咨询项目选择。",
+    "ctaMail": "发送电子邮件",
+    "ctaHours": "受理时间：{hours}"
+  },
+  "about": {
+    "eyebrow": "About Us",
+    "title": "关于我们",
+    "lead": "保护奄美珍稀自然，通过体验与文化交流传递其魅力的NPO法人。",
+    "missionEyebrow": "Mission",
+    "missionH2": "我们的使命",
+    "missionLead": "奄美大岛于2021年被列为世界自然遗产。随着游客增加，我们以民间组织的立场，从三个领域守护岛屿自然。",
+    "missions": {
+      "conservation": {
+        "en": "Conservation",
+        "title": "环境保护",
+        "body": "致力于保护奄美大岛及周边地区珍稀动植物和特有生态系统，将其传承给未来世代。"
+      },
+      "experience": {
+        "en": "Experience",
+        "title": "体验与教育",
+        "body": "策划运营观察体验活动，为人们提供与自然和文化亲近的机会，并广泛传播其重要性。"
+      },
+      "research": {
+        "en": "Research",
+        "title": "调查与信息发布",
+        "body": "对珍稀动植物及生态系统进行调查研究，通过官网和社交媒体发布相关信息。"
+      }
+    },
+    "historyEyebrow": "History",
+    "historyH2": "发展历程",
+    "history": [
+      { "year": "2017年9月", "text": "久保公与志同道合者开始举办奄美环境保护活动学习会。" },
+      { "year": "2017年9月", "text": "召开发起人会议，确定设立宗旨、章程及事业计划。" },
+      { "year": "2017年10月", "text": "召开成立大会，批准法人成立及役员人选。" },
+      { "year": "2018年3月", "text": "作为特定非营利活动法人（NPO法人）正式成立（完成登记）。" },
+      { "year": "现在", "text": "由认证向导持续开展自然体验事业及调查启发活动。" }
+    ],
+    "orgEyebrow": "Organization",
+    "orgH2": "组织概要",
+    "orgTable": {
+      "name": "名称",
+      "representative": "代表人",
+      "address": "地址",
+      "established": "成立时间",
+      "tel": "电话",
+      "email": "电子邮件",
+      "activities": "活动内容",
+      "area": "服务地区",
+      "representativeValue": "理事长　久保 公",
+      "activitiesValue": "自然体验·观察活动策划运营 / 珍稀动植物·生态系统调查研究与信息提供 / 环境保护启发·文化交流",
+      "areaValue": "奄美大岛及周边地区"
+    },
+    "contactLink": "咨询我们的活动"
+  },
+  "tours": {
+    "eyebrow": "Experience Programs",
+    "title": "体验项目",
+    "lead": "从野生动物观察到海洋河流活动、山地徒步和岛屿文化体验——以多种形式介绍奄美的魅力。",
+    "reservationText": "预约和申请请致电。欢迎咨询内容、所需时间、费用等详情。",
+    "reservationTextBold": "电话",
+    "note": "※ 各项目内容和时间可能因天气、季节、潮位等而变更。请致电确认活动情况。",
+    "filters": {
+      "all": "全部",
+      "自然観察": "自然观察",
+      "海・川": "海洋与河流",
+      "山・森": "山林",
+      "島の文化": "岛屿文化",
+      "その他": "其他"
+    },
+    "filterAriaLabel": "按类别筛选",
+    "categories": {
+      "自然観察": "自然观察",
+      "海・川": "海洋与河流",
+      "山・森": "山林",
+      "島の文化": "岛屿文化",
+      "アウトドア": "户外活动",
+      "撮影": "摄影"
+    },
+    "timeOfDay": {
+      "昼": "白天",
+      "夜": "夜间"
+    },
+    "programNoLabel": "项目编号",
+    "programs": {
+      "wildlife-watching": {
+        "title": "野生动植物观察",
+        "summary": "观察奄美黑兔等奄美特有的珍稀生物，体验昼夜不同的自然面貌。"
+      },
+      "sea-kayak-canoe": {
+        "title": "海上皮划艇·河流独木舟",
+        "summary": "乘坐皮划艇或独木舟探索平静的海湾和红树林河道——从水面视角领略自然之美的热门项目。"
+      },
+      "river-play": {
+        "title": "清流嬉水",
+        "summary": "在清澈的溪流中寻找水中生物，享受清凉时光。非常适合家庭带孩子参加。"
+      },
+      "diving-snorkeling": {
+        "title": "潜水·浮潜",
+        "summary": "探索奄美水下世界——珊瑚礁与五彩缤纷的热带鱼在等待着您。"
+      },
+      "tidepool": {
+        "title": "潮池探索",
+        "summary": "俯身观察潮池，发现小型海洋生物的热闹世界。难得的近距离观察机会。"
+      },
+      "fishing": {
+        "title": "船钓·矶钓",
+        "summary": "在奄美丰饶的海域垂钓——从船上或礁石岸边，感受钓鱼的乐趣和大海的馈赠。"
+      },
+      "trekking": {
+        "title": "山地徒步",
+        "summary": "漫步亚热带森林，感受特有植物与森林气息。初学者友好路线也有提供。"
+      },
+      "island-food": {
+        "title": "岛屿饮食体验",
+        "summary": "亲手采集并品尝奄美特产和当地食材，深入了解岛屿的饮食文化与生活方式。"
+      },
+      "shima-uta": {
+        "title": "岛唄·岛舞·岛语·三线体验",
+        "summary": "体验世代相传的奄美传统歌谣、舞蹈、方言和三线琴，用身体感受土地的文化。"
+      },
+      "town-walk": {
+        "title": "岛屿街区漫步",
+        "summary": "漫步街道，探寻岛屿历史、文化及泥染·织布等传统手工艺。"
+      },
+      "old-trail": {
+        "title": "古道徒步",
+        "summary": "沿着昔日人们往来的古老道路行走，感受奄美生活历史的厚重。"
+      },
+      "camp": {
+        "title": "露营体验",
+        "summary": "在大自然中度过一夜，在星空和夜间声响的包围中，体验奄美独有的户外时光。"
+      },
+      "island-life": {
+        "title": "岛屿民宿体验",
+        "summary": "寄宿在岛上的家庭中，亲身感受岛屿生活的节奏。与人的相遇将成为旅途中最美好的回忆。"
+      },
+      "whale-watching": {
+        "title": "赏鲸",
+        "summary": "与冬春季节来访奄美海域的鲸鱼相遇，在船上观赏其雄伟的身姿。"
+      },
+      "location-coordinate": {
+        "title": "拍摄取景协调",
+        "summary": "提供各类拍摄的选景到现场安排全程服务。熟知奄美自然的工作人员全力支持。"
+      }
+    }
+  },
+  "access": {
+    "eyebrow": "Access",
+    "title": "交通信息",
+    "lead": "办公室地址、交通方式及停车场信息。",
+    "locationH2": "地址",
+    "mapTitle": "奄美大岛自然体验活动协议会办公室周边地图",
+    "dlName": "名称",
+    "dlAddress": "地址",
+    "dlTel": "电话",
+    "dlEmail": "电子邮件",
+    "dlHours": "受理时间",
+    "transportEyebrow": "Transportation",
+    "transportH2": "交通与停车场",
+    "transports": {
+      "plane": {
+        "title": "乘飞机前来",
+        "body": "从奄美机场驾车前往住用町方向。除主要城市直航外，也可在鹿儿岛机场转乘。"
+      },
+      "car": {
+        "title": "驾车前来",
+        "body": "岛内移动推荐租车。详细集合地点路线将在预约确认后告知。"
+      },
+      "parking": {
+        "title": "停车场",
+        "body": "办公室设有停车位，欢迎直接驾车前来。"
+      }
+    }
+  },
+  "contact": {
+    "eyebrow": "Contact / Reservation",
+    "title": "联系与预约",
+    "lead": "预约和咨询建议致电联系，最为可靠。欢迎随时与我们联系。",
+    "phoneEyebrow": "Reservation by Phone",
+    "phoneH2": "电话预约",
+    "phoneHours": "受理时间：{hours}",
+    "cardContactH2": "联系方式",
+    "cardAddressH2": "地址",
+    "cardNotesH2": "预约注意事项",
+    "cardHours": "受理时间：{hours}",
+    "notes": [
+      "因天气、潮位等原因，项目内容和时间可能有所变更。",
+      "当日或前一日预约请致电确认。",
+      "也可通过电子邮件进行咨询。"
+    ]
+  },
+  "footer": {
+    "description": "守护世界自然遗产奄美大岛的珍稀自然，面向未来。注重生态保护与安全管理，为您提供从森林、河川、海洋到岛屿文化的多样自然体验。",
+    "sitemap": "网站地图",
+    "contactSection": "联系我们",
+    "hours": "受理时间：{hours}",
+    "contactLink": "联系与预约"
+  },
+  "splash": {
+    "ariaLabel": "加载中"
+  }
+}

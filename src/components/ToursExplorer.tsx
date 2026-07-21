@@ -2,25 +2,35 @@
 
 import { memo, useMemo, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { tours } from "@/data/tours";
 import type { Tour, TourCategory } from "@/types";
 import { CATEGORY_META, TimeBadges } from "./tourMeta";
 
 type FilterKey = "all" | "自然観察" | "海・川" | "山・森" | "島の文化" | "その他";
 
-const FILTERS: { key: FilterKey; label: string; categories: TourCategory[] }[] = [
-  { key: "all", label: "すべて", categories: [] },
-  { key: "自然観察", label: "自然観察", categories: ["自然観察"] },
-  { key: "海・川", label: "海・川", categories: ["海・川"] },
-  { key: "山・森", label: "山・森", categories: ["山・森"] },
-  { key: "島の文化", label: "島の文化", categories: ["島の文化"] },
-  { key: "その他", label: "その他", categories: ["アウトドア", "撮影"] },
+const FILTER_KEYS: { key: FilterKey; categories: TourCategory[] }[] = [
+  { key: "all", categories: [] },
+  { key: "自然観察", categories: ["自然観察"] },
+  { key: "海・川", categories: ["海・川"] },
+  { key: "山・森", categories: ["山・森"] },
+  { key: "島の文化", categories: ["島の文化"] },
+  { key: "その他", categories: ["アウトドア", "撮影"] },
 ];
 
 const TourDetailCard = memo(function TourDetailCard({ tour }: { tour: Tour }) {
   const reduce = useReducedMotion();
+  const t = useTranslations("tours");
   const meta = CATEGORY_META[tour.category];
   const Icon = meta.icon;
+
+  const title = t(`programs.${tour.slug}.title`);
+  const summary = t(`programs.${tour.slug}.summary`);
+  const categoryLabel = t(`categories.${tour.category}`);
+  const timeLabels = {
+    昼: t("timeOfDay.昼"),
+    夜: t("timeOfDay.夜"),
+  } as const;
 
   return (
     <motion.article
@@ -39,24 +49,23 @@ const TourDetailCard = memo(function TourDetailCard({ tour }: { tour: Tour }) {
       />
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-2">
-          {/* 資料と同じ通し番号 */}
           <span
             className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full font-heading text-xs font-bold text-white"
             style={{ background: meta.gradient }}
-            aria-label={`プログラム番号 ${tour.no}`}
+            aria-label={`${t("programNoLabel")} ${tour.no}`}
           >
             {tour.no}
           </span>
           <span className="inline-flex items-center gap-1.5 rounded-full bg-accent/10 px-3 py-1 text-xs font-medium text-accent">
             <Icon size={13} aria-hidden />
-            {tour.category}
+            {categoryLabel}
           </span>
         </div>
-        <TimeBadges times={tour.timeOfDay} />
+        <TimeBadges times={tour.timeOfDay} labels={timeLabels} />
       </div>
 
-      <h2 className="mt-4 font-heading text-xl font-bold">{tour.title}</h2>
-      <p className="mt-2 text-sm leading-relaxed text-text-muted">{tour.summary}</p>
+      <h2 className="mt-4 font-heading text-xl font-bold">{title}</h2>
+      <p className="mt-2 text-sm leading-relaxed text-text-muted">{summary}</p>
     </motion.article>
   );
 });
@@ -64,19 +73,21 @@ const TourDetailCard = memo(function TourDetailCard({ tour }: { tour: Tour }) {
 export function ToursExplorer() {
   const [filter, setFilter] = useState<FilterKey>("all");
   const reduce = useReducedMotion();
+  const t = useTranslations("tours");
 
   const visible = useMemo(() => {
-    const def = FILTERS.find((f) => f.key === filter);
+    const def = FILTER_KEYS.find((f) => f.key === filter);
     if (!def || def.key === "all") return tours;
-    return tours.filter((t) => def.categories.includes(t.category));
+    return tours.filter((tour) => def.categories.includes(tour.category));
   }, [filter]);
 
   return (
     <div>
       {/* フィルタタブ */}
-      <div role="tablist" aria-label="カテゴリで絞り込み" className="flex flex-wrap gap-2">
-        {FILTERS.map((f) => {
+      <div role="tablist" aria-label={t("filterAriaLabel")} className="flex flex-wrap gap-2">
+        {FILTER_KEYS.map((f) => {
           const active = f.key === filter;
+          const label = t(`filters.${f.key}`);
           return (
             <button
               key={f.key}
@@ -98,7 +109,7 @@ export function ToursExplorer() {
                   }
                 />
               )}
-              <span className="relative z-10">{f.label}</span>
+              <span className="relative z-10">{label}</span>
             </button>
           );
         })}

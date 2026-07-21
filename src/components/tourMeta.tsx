@@ -26,19 +26,26 @@ export const CATEGORY_META: Record<
 
 const TIME_ICON: Record<TimeOfDay, LucideIcon> = { 昼: Sun, 夜: Moon };
 
-/** 開催時間帯（昼／夜）のバッジ */
-export function TimeBadges({ times }: { times: TimeOfDay[] }) {
+/** 開催時間帯（昼／夜）のバッジ。labels で翻訳済みラベルを渡せる */
+export function TimeBadges({
+  times,
+  labels,
+}: {
+  times: TimeOfDay[];
+  labels?: Partial<Record<TimeOfDay, string>>;
+}) {
   return (
     <span className="inline-flex gap-1.5">
-      {times.map((t) => {
-        const Icon = TIME_ICON[t];
+      {times.map((tod) => {
+        const Icon = TIME_ICON[tod];
+        const label = labels?.[tod] ?? tod;
         return (
           <span
-            key={t}
+            key={tod}
             className="inline-flex items-center gap-1 rounded-full bg-accent/10 px-2 py-0.5 text-[11px] font-medium text-accent"
           >
             <Icon size={11} aria-hidden />
-            {t}
+            {label}
           </span>
         );
       })}

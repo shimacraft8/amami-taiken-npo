@@ -1,8 +1,12 @@
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { CONTACT_INFO, MAIL_HREF, NAV_LINKS, ORG_NAME, TEL_HREF } from "@/lib/site";
 
-export function Footer() {
+export async function Footer() {
   const year = new Date().getFullYear();
+  const t = await getTranslations("footer");
+  const tn = await getTranslations("nav");
+  const tc = await getTranslations("common");
 
   return (
     <footer className="mt-auto border-t border-border bg-surface">
@@ -11,15 +15,14 @@ export function Footer() {
         <div>
           <span className="font-heading text-sm font-semibold">{ORG_NAME}</span>
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-text-muted">
-            世界自然遺産・奄美大島の希少な自然を未来へ。保全への配慮と安全管理を大切に、
-            森・川・海から島の文化まで、多彩な自然体験をご案内します。
+            {t("description")}
           </p>
         </div>
 
         {/* サイトマップ */}
-        <nav aria-label="フッターナビゲーション">
+        <nav aria-label={t("sitemap")}>
           <h2 className="font-heading text-xs font-semibold uppercase tracking-[0.2em] text-text-muted">
-            Site Map
+            {t("sitemap")}
           </h2>
           <ul className="mt-4 space-y-2.5">
             {NAV_LINKS.map((link) => (
@@ -28,23 +31,23 @@ export function Footer() {
                   href={link.href}
                   className="text-sm text-text transition-colors hover:text-accent"
                 >
-                  {link.label}
+                  {tn(link.labelKey)}
                 </Link>
               </li>
             ))}
           </ul>
         </nav>
 
-        {/* 連絡先（団体としての情報・ダミー） */}
+        {/* 連絡先 */}
         <div>
           <h2 className="font-heading text-xs font-semibold uppercase tracking-[0.2em] text-text-muted">
-            Contact
+            {t("contactSection")}
           </h2>
           <address className="mt-4 space-y-2.5 text-sm not-italic text-text-muted">
             <p>
-              {CONTACT_INFO.postal}
+              {tc("postal")}
               <br />
-              {CONTACT_INFO.address}
+              {tc("address")}
             </p>
             <p>
               TEL：
@@ -56,11 +59,11 @@ export function Footer() {
                 {CONTACT_INFO.email}
               </a>
               <br />
-              受付：{CONTACT_INFO.hours}
+              {t("hours", { hours: tc("hours") })}
             </p>
             <p>
               <Link href="/contact" className="text-accent hover:underline">
-                お問い合わせ・予約
+                {t("contactLink")}
               </Link>
             </p>
           </address>
@@ -69,7 +72,6 @@ export function Footer() {
 
       <div className="border-t border-border">
         <div className="mx-auto max-w-content px-5 py-5 md:px-8">
-          {/* copyright は団体名のみ（個人名・制作者名は記載しない） */}
           <p className="text-center text-xs text-text-muted">
             © {year} {ORG_NAME}
           </p>

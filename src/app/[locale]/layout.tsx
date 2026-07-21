@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Outfit, Noto_Sans_JP, Noto_Serif_JP } from "next/font/google";
-import "./globals.css";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
+import { notFound } from "next/navigation";
+import "../globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { StickyContact } from "@/components/StickyContact";
@@ -14,8 +18,8 @@ import {
   REPRESENTATIVE,
   SITE_URL,
 } from "@/lib/site";
+import { routing } from "@/i18n/routing";
 
-// 見出し（英字）
 const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],
@@ -23,15 +27,13 @@ const outfit = Outfit({
   display: "swap",
 });
 
-// 本文・見出し（日本語）
 const notoSansJP = Noto_Sans_JP({
   variable: "--font-noto-sans-jp",
   weight: ["400", "500", "700"],
   display: "swap",
-  preload: false, // 日本語フォントはサブセットが大きいため preload を無効化
+  preload: false,
 });
 
-// パターンA（ダークアース）切替時の明朝見出し用
 const notoSerifJP = Noto_Serif_JP({
   variable: "--font-noto-serif-jp",
   weight: ["400", "600", "700"],
@@ -53,19 +55,19 @@ export const metadata: Metadata = {
     title: ORG_NAME,
     description: ORG_DESCRIPTION,
     url: SITE_URL,
-    // TODO: クライアント確認（OGP画像。実写真確定後に /opengraph-image を追加）
   },
   twitter: {
     card: "summary_large_image",
     title: ORG_NAME,
     description: ORG_DESCRIPTION,
   },
-  // インデックス可否は環境変数で自動判定（allowIndex）。
-  // 本番(production) かつ NEXT_PUBLIC_ALLOW_INDEX=true のときだけ許可、それ以外は noindex。
   robots: { index: allowIndex, follow: allowIndex },
 };
 
-// 構造化データ：団体（schema.org/NGO）
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
 const ngoJsonLd = {
   "@context": "https://schema.org",
   "@type": "NGO",
@@ -87,14 +89,26 @@ const ngoJsonLd = {
   },
 } as const;
 
-export default function RootLayout({
+export default async function LocaleLayout({
   children,
-}: Readonly<{
+  params,
+}: {
   children: React.ReactNode;
-}>) {
+  params: { locale: string };
+}) {
+  const { locale } = params;
+
+  if (!(routing.locales as readonly string[]).includes(locale)) {
+    notFound();
+  }
+
+  setRequestLocale(locale);
+
+  const messages = await getMessages();
+
   return (
     <html
-      lang="ja"
+      lang={locale}
       className={`${outfit.variable} ${notoSansJP.variable} ${notoSerifJP.variable} h-full`}
     >
       <body className="min-h-full flex flex-col font-sans">
@@ -102,11 +116,12 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(ngoJsonLd) }}
         />
-        <Header />
-        {/* スマホ固定CTAに隠れないよう下部に余白（lg以上は不要） */}
-        <div className="flex flex-1 flex-col pb-20 lg:pb-0">{children}</div>
-        <Footer />
-        <StickyContact />
+        <NextIntlClientProvider messages={messages}>
+          <Header />
+          <div className="flex flex-1 flex-col pb-20 lg:pb-0">{children}</div>
+          <Footer />
+          <StickyContact />
+        </NextIntlClientProvider>
         <GoogleAnalytics />
       </body>
     </html>

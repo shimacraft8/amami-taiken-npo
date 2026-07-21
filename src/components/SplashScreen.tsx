@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import {
   AMAMI_CHARS,
   BrandLogo,
@@ -27,6 +28,7 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 
 export function SplashScreen() {
   const reduce = useReducedMotion();
+  const t = useTranslations("splash");
   // SSR/初回描画では必ず覆ってコンテンツのチラ見えを防ぐ
   const [show, setShow] = useState(true);
   const [run, setRun] = useState(false);
@@ -59,7 +61,7 @@ export function SplashScreen() {
         <motion.div
           key="splash"
           role="status"
-          aria-label="読み込み中"
+          aria-label={t("ariaLabel")}
           initial={false}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.6, ease: EASE }}

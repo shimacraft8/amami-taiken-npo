@@ -1,50 +1,56 @@
 import type { Metadata } from "next";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
+import { setRequestLocale } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { PageHeader } from "@/components/PageHeader";
 import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
-import {
-  CONTACT_INFO,
-  MAIL_HREF,
-  SITE_URL,
-  TEL_HREF,
-} from "@/lib/site";
+import { CONTACT_INFO, MAIL_HREF, SITE_URL, TEL_HREF } from "@/lib/site";
+import { routing } from "@/i18n/routing";
 
-export const metadata: Metadata = {
-  title: "お問い合わせ・体験予約",
-  description:
-    "体験プログラムのご予約・ご相談はお電話が便利です。ご希望の日程・人数・プログラムをお知らせください。",
-  alternates: { canonical: "/contact" },
-  openGraph: {
-    title: "お問い合わせ・体験予約",
-    description: "体験プログラムのご予約・ご相談はお電話で。",
-    url: `${SITE_URL}/contact`,
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale: string };
+}): Promise<Metadata> {
+  const t = await getTranslations({ locale: params.locale, namespace: "contact" });
+  return {
+    title: t("title"),
+    alternates: { canonical: "/contact" },
+  };
+}
 
-export default function ContactPage() {
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
+export default async function ContactPage({ params }: { params: { locale: string } }) {
+  setRequestLocale(params.locale);
+  const t = await getTranslations("contact");
+  const tc = await getTranslations("common");
+
+  const notes = t.raw("notes") as string[];
+
   return (
     <>
       <PageHeader
-        eyebrow="Contact / Reservation"
-        title="お問い合わせ・体験予約"
-        lead="ご予約・ご相談はお電話が確実です。お気軽にお問い合わせください。"
+        eyebrow={t("eyebrow")}
+        title={t("title")}
+        lead={t("lead")}
         tone="forest"
       />
 
-      {/* 電話予約（メイン導線） */}
+      {/* 電話予約 */}
       <section className="mx-auto max-w-content px-5 pt-14 md:px-8">
         <Reveal>
           <div className="flex flex-col items-center gap-5 rounded-3xl bg-accent px-7 py-10 text-center text-white md:flex-row md:justify-between md:text-left">
             <div>
               <p className="font-heading text-xs uppercase tracking-[0.25em] text-white/80">
-                Reservation by Phone
+                {t("phoneEyebrow")}
               </p>
-              <h2 className="mt-2 font-heading text-xl font-bold">
-                ご予約・お申し込みはお電話で
-              </h2>
+              <h2 className="mt-2 font-heading text-xl font-bold">{t("phoneH2")}</h2>
               <p className="mt-1 flex items-center justify-center gap-1.5 text-sm text-white/85 md:justify-start">
                 <Clock size={14} aria-hidden />
-                受付：{CONTACT_INFO.hours}
+                {t("phoneHours", { hours: tc("hours") })}
               </p>
             </div>
             <a
@@ -61,9 +67,8 @@ export default function ContactPage() {
       {/* 連絡先・所在地・注意事項 */}
       <section className="mx-auto max-w-content px-5 py-16 md:px-8 md:py-20">
         <Stagger className="grid gap-6 md:grid-cols-3">
-          {/* 連絡先 */}
           <StaggerItem className="rounded-2xl border border-border bg-surface p-6">
-            <h2 className="font-heading text-base font-semibold">連絡先</h2>
+            <h2 className="font-heading text-base font-semibold">{t("cardContactH2")}</h2>
             <p className="mt-3 flex items-center gap-2 text-sm">
               <Phone size={16} aria-hidden className="shrink-0 text-accent" />
               <a href={TEL_HREF} className="font-medium text-accent hover:underline">
@@ -78,32 +83,30 @@ export default function ContactPage() {
             </p>
             <p className="mt-2 flex items-center gap-2 text-sm text-text-muted">
               <Clock size={16} aria-hidden className="shrink-0 text-accent" />
-              受付：{CONTACT_INFO.hours}
+              {t("cardHours", { hours: tc("hours") })}
             </p>
           </StaggerItem>
 
-          {/* 所在地 */}
           <StaggerItem className="rounded-2xl border border-border bg-surface p-6">
-            <h2 className="font-heading text-base font-semibold">所在地</h2>
+            <h2 className="font-heading text-base font-semibold">{t("cardAddressH2")}</h2>
             <p className="mt-3 flex items-start gap-2 text-sm text-text-muted">
               <MapPin size={16} aria-hidden className="mt-0.5 shrink-0 text-accent" />
               <span>
-                {CONTACT_INFO.postal}
+                {tc("postal")}
                 <br />
-                {CONTACT_INFO.address}
+                {tc("address")}
               </span>
             </p>
           </StaggerItem>
 
-          {/* ご予約にあたって */}
           <StaggerItem className="rounded-2xl bg-accent/5 p-6 text-sm leading-relaxed text-text-muted">
             <h2 className="font-heading text-base font-semibold text-text">
-              ご予約にあたって
+              {t("cardNotesH2")}
             </h2>
             <ul className="mt-3 list-disc space-y-1.5 pl-5">
-              <li>天候・潮位により内容や時間が変わる場合があります。</li>
-              <li>前日・当日のご予約はお電話が確実です。</li>
-              <li>メールでのご相談も承ります。</li>
+              {notes.map((note, i) => (
+                <li key={i}>{note}</li>
+              ))}
             </ul>
           </StaggerItem>
         </Stagger>
