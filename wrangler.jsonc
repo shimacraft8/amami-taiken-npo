@@ -21,9 +21,11 @@
     "production": {
       "name": "amami-taiken-npo-production",
       "workers_dev": false,
+      // DNSの A レコード（apex / www）をプロキシ(オレンジ)にすると、このルートで Worker が応答する。
+      // 灰色に戻せば旧Vercelへ即時に戻る（ロールバック手段）。
       "routes": [
-        { "pattern": "amamitaiken.com", "custom_domain": true },
-        { "pattern": "www.amamitaiken.com", "custom_domain": true }
+        { "pattern": "amamitaiken.com/*", "zone_name": "amamitaiken.com" },
+        { "pattern": "www.amamitaiken.com/*", "zone_name": "amamitaiken.com" }
       ],
       "services": [{ "binding": "WORKER_SELF_REFERENCE", "service": "amami-taiken-npo-production" }],
       "vars": { "CF_ENV": "production" }

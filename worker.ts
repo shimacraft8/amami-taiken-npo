@@ -41,6 +41,11 @@ async function serveWithRange(request: Request, env: Env): Promise<Response> {
 const worker = {
   async fetch(request: Request, env: Env, ctx: unknown) {
     const url = new URL(request.url);
+    // 旧Vercelと同じく http は同じホストの https へ 308 転送
+    if (url.protocol === "http:" && url.hostname.endsWith("amamitaiken.com")) {
+      url.protocol = "https:";
+      return Response.redirect(url.toString(), 308);
+    }
     // 旧Vercelと同じく www は全パスを apex へ転送（拡張子付きファイルも含む）
     if (url.hostname === "www.amamitaiken.com") {
       url.hostname = "amamitaiken.com";
