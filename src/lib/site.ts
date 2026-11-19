@@ -15,15 +15,12 @@ export const REPRESENTATIVE = "久保 公";
 export const SITE_URL = "https://amamitaiken.com";
 
 /**
- * 検索エンジンのインデックス許可フラグ。
- * 本番(production)環境で、かつ NEXT_PUBLIC_ALLOW_INDEX=true のときだけ true。
- * → プレビュー/staging は常に noindex、ローカル(VERCEL_ENV 未定義)も noindex。
- *
- * 【公開時】Vercel の Production 環境変数に  NEXT_PUBLIC_ALLOW_INDEX=true  を設定すると
- *          本番のみインデックス許可になります（再デプロイが必要）。
+ * 検索エンジンのインデックス許可フラグ（ビルド時に確定）。
+ * 本番ビルド（npm run cf:build:production）だけが CF_ENV=production と
+ * NEXT_PUBLIC_ALLOW_INDEX=true を渡す。それ以外のビルドは noindex。
  */
 export const allowIndex =
-  process.env.VERCEL_ENV === "production" &&
+  (process.env.CF_ENV === "production" || process.env.VERCEL_ENV === "production") &&
   process.env.NEXT_PUBLIC_ALLOW_INDEX === "true";
 
 export const ORG_DESCRIPTION =

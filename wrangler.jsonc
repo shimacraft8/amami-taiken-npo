@@ -1,0 +1,28 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  // SHIMA CRAFT の Cloudflare アカウント（shimacraft8@gmail.com）に固定。別アカウントへは配信されない。
+  "account_id": "42f69e35f08bb21dca5194467e2f59de",
+  "name": "amami-taiken-npo",
+  "main": "worker.ts",
+  "compatibility_date": "2026-07-29",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "services": [{ "binding": "WORKER_SELF_REFERENCE", "service": "amami-taiken-npo" }],
+  "workers_dev": true,
+  "vars": { "CF_ENV": "preview" },
+  "env": {
+    "production": {
+      "name": "amami-taiken-npo-production",
+      "workers_dev": false,
+      "routes": [
+        { "pattern": "amamitaiken.com", "custom_domain": true },
+        { "pattern": "www.amamitaiken.com", "custom_domain": true }
+      ],
+      "services": [{ "binding": "WORKER_SELF_REFERENCE", "service": "amami-taiken-npo-production" }],
+      "vars": { "CF_ENV": "production" }
+    }
+  }
+}
