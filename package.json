@@ -4,10 +4,10 @@
   "private": true,
   "description": "NPO法人奄美大島自然体験活動協議会 公式サイト",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "next dev --webpack",
+    "build": "next build --webpack",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "cf:build": "opennextjs-cloudflare build",
     "cf:build:production": "CF_ENV=production NEXT_PUBLIC_ALLOW_INDEX=true opennextjs-cloudflare build",
     "cf:preview": "npm run cf:build && opennextjs-cloudflare preview",
@@ -18,24 +18,24 @@
     "@hookform/resolvers": "^5.4.0",
     "framer-motion": "^11.3.31",
     "lucide-react": "^1.17.0",
-    "next": "^14.2.35",
-    "next-intl": "^4.13.2",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "next": "^16.4.6",
+    "next-intl": "^4.15.1",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
     "react-hook-form": "^7.78.0",
-    "zod": "^4.4.3"
+    "zod": "^4.6.7"
   },
   "devDependencies": {
-    "@opennextjs/cloudflare": "^1.15.1",
+    "@opennextjs/cloudflare": "^1.20.17",
     "@types/node": "^20.16.5",
-    "@types/react": "^18.3.5",
-    "@types/react-dom": "^18.3.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "autoprefixer": "^10.4.20",
-    "eslint": "^8.57.0",
-    "eslint-config-next": "^14.2.35",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.4.6",
     "postcss": "^8.4.45",
     "tailwindcss": "^3.4.10",
     "typescript": "^5.5.4",
-    "wrangler": "^4.115.0"
+    "wrangler": "^4.165.0"
   }
 }

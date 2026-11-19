@@ -17,9 +17,10 @@ import { routing } from "@/i18n/routing";
 export async function generateMetadata({
   params,
 }: {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
-  const t = await getTranslations({ locale: params.locale, namespace: "about" });
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "about" });
   return {
     title: t("title"),
     alternates: { canonical: "/about" },
@@ -36,8 +37,9 @@ const MISSION_ICONS = {
   research: Search,
 } as const;
 
-export default async function AboutPage({ params }: { params: { locale: string } }) {
-  setRequestLocale(params.locale);
+export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations("about");
   const tc = await getTranslations("common");
 

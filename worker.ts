@@ -38,7 +38,7 @@ async function serveWithRange(request: Request, env: Env): Promise<Response> {
   return new Response(request.method === "HEAD" ? null : buf.slice(start, end + 1), { status: 206, headers });
 }
 
-export default {
+const worker = {
   async fetch(request: Request, env: Env, ctx: unknown) {
     const url = new URL(request.url);
     // 旧Vercelと同じく www は全パスを apex へ転送（拡張子付きファイルも含む）
@@ -58,3 +58,5 @@ export default {
     return handler.fetch(request, env, ctx);
   },
 };
+
+export default worker;

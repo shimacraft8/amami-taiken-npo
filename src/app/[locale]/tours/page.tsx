@@ -12,9 +12,10 @@ import { routing } from "@/i18n/routing";
 export async function generateMetadata({
   params,
 }: {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
-  const t = await getTranslations({ locale: params.locale, namespace: "tours" });
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "tours" });
   return {
     title: t("title"),
     alternates: { canonical: "/tours" },
@@ -50,8 +51,9 @@ const toursJsonLd = {
   })),
 } as const;
 
-export default async function ToursPage({ params }: { params: { locale: string } }) {
-  setRequestLocale(params.locale);
+export default async function ToursPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations("tours");
 
   return (
