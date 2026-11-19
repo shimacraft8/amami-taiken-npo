@@ -8,7 +8,9 @@
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
   "assets": {
     "directory": ".open-next/assets",
-    "binding": "ASSETS"
+    "binding": "ASSETS",
+    // 動画だけはWorkerを先に通し、Range(206)応答を返す（worker.ts）
+    "run_worker_first": ["/*.mp4"]
   },
   "services": [{ "binding": "WORKER_SELF_REFERENCE", "service": "amami-taiken-npo" }],
   "workers_dev": true,
